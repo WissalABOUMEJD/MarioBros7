@@ -12,8 +12,8 @@ public class Objet {
 	private int x;
 	private int y;
 	
-	private Image imageObjet;
-	private ImageIcon imageIcon;
+	protected Image imageObjet;
+	protected ImageIcon icoObjet;
 	
 	
 	public Objet(int largeur, int hauteur, int x, int y) {
@@ -51,11 +51,11 @@ public class Objet {
 	}
 
 	public ImageIcon getImageIcon() {
-		return imageIcon;
+		return icoObjet;
 	}
 
 	public void setImageIcon(ImageIcon imageIcon) {
-		this.imageIcon = imageIcon;
+		this.icoObjet = imageIcon;
 	}
 
 	public void actionObjet(Collision collision) {		
