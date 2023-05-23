@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import audioMario.Audio;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class Niveau extends JPanel{
 
@@ -36,9 +37,30 @@ public class Niveau extends JPanel{
 	private static final int longueurImage = 1632;
 	private static final int largeurImage = 1632;
 	
-	public Brique brique;
+	public Brique brique1;
+	public Brique brique2;
+	public Brique brique3;
+	public Brique brique4;
+	public Brique brique5;
+	public Brique brique6;
+	public Brique brique7;
+	public Brique brique8;
+	public Brique brique9;
+	public Brique brique10;
+	public Brique brique11;
+	public Brique brique12;
+
+	
 	public CubeMystere cubeMystere;
-	public Tuyau tuyau;
+	public Tuyau tuyau1;
+	public Tuyau tuyau2;
+	public Tuyau tuyau3;
+	public Tuyau tuyau4;
+	public Tuyau tuyau5;
+	public Tuyau tuyau6;
+	
+	private ArrayList<Objet> tabObjets;
+	
 	
 	public Temps temps;
 	public ScoreJeu score;
@@ -118,17 +140,27 @@ public class Niveau extends JPanel{
 
 		//Image brique = new ImageIcon(getClass().getResource("/images/Brique.png")).getImage();
 
-		brique = new Brique(1200, 400);
-		cubeMystere = new CubeMystere(840, 400);
-		tuyau = new Tuyau(1800, 485);
+		brique1 = new Brique(1200, 400);
+		brique2 = new Brique(1300, 400);
+		brique3 = new Brique(1400, 400);
+		brique4 = new Brique(1500, 400);
 		
+		tuyau1 = new Tuyau(1800, 485);
+		tuyau2 = new Tuyau(1900, 485);
+		
+		tabObjets = new ArrayList<Objet>();
+		this.tabObjets.add(this.tuyau1);
+		this.tabObjets.add(this.tuyau2);
+		this.tabObjets.add(this.brique1);
+		this.tabObjets.add(this.brique2);
+		this.tabObjets.add(this.brique3);
 		
 		g2.drawImage(this.fondDuJeu1, xFond1, 0, null); 		 	    
 		g2.drawImage(this.fondDuJeu2, xFond2, 0, null); 	
 		g2.drawImage(Mario, player.getX(), player.getY(), null);
-		g2.drawImage(this.brique.getImageBrique(), this.brique.getX()+xFond1, this.brique.getY(), null);
-		g2.drawImage(this.tuyau.getImageBrique(), this.tuyau.getX()+xFond1, this.tuyau.getY(), null); 		 	
-		g2.drawImage(this.cubeMystere.getImageCube(), this.cubeMystere.getX()+xFond1, this.cubeMystere.getY(), null); 	
+		for(int i = 0; i < this.tabObjets.size(); i++){
+ 	 		g2.drawImage(this.tabObjets.get(i).getImageObjet(), this.tabObjets.get(i).getX()+xFond1, this.tabObjets.get(i).getY(), null);
+ 	 	}	 	
 		Font font = new Font("Press Start 2P", Font.PLAIN, 20);
 		g2.setFont(font);
 		g2.drawString(this.temps.getTempsRestant(), 5, 25);
