@@ -15,10 +15,8 @@ public class CubeMystere extends Objet{
 	
 	public CubeMystere(int x, int y) {
 		super(40, 40, x, y);
-		iconCube = new ImageIcon(getClass().getResource("/images/CubeMystère.png"));
-		imageCube = iconCube.getImage();
-		this.setImageIcon(iconCube);
-		this.setImageObjet(imageCube);
+		super.icoObjet = new ImageIcon(getClass().getResource("/images/CubeMystère.png"));
+		super.imageObjet = this.icoObjet.getImage();
 		afficher = true;
 	}
 	
