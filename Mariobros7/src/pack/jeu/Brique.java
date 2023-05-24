@@ -12,7 +12,7 @@ public class Brique extends Objet{
 	
 	public Brique(int x, int y) {
 		super(40, 40, x, y);
-		super.icoObjet = new ImageIcon(getClass().getResource("/images/Brique.png"));
+		super.icoObjet = new ImageIcon(getClass().getResource("/images/bloc.png"));
 		super.imageObjet = this.icoObjet.getImage();
 		afficher = true;
 	}
