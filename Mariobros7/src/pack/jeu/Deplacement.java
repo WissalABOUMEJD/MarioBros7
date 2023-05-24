@@ -11,7 +11,7 @@ public class Deplacement implements KeyListener {
 	
 
 	
-	private final static int vitesseDeplacement = 6;   //Attention ce nombre doit diviser 1644.
+	private final static int vitesseDeplacement = 4;   //Attention ce nombre doit diviser 1644.
 	
 
 	@Override
