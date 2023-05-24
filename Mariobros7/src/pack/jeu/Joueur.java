@@ -61,16 +61,6 @@ public class Joueur {
 			sautEnCours = false;
 		}
 	}
-	
-
-    // Détection contact à droite de Mario
-    protected boolean contactAvant(Objet objet){
-	    if(this.xJoueur + this.largeurMario < objet.getX() || this.xJoueur + this.largeurMario > objet.getX() + 5 ||
-	       this.yJoueur + this.hauteurMario <= objet.getY() || this.yJoueur >= objet.getY() + objet.getHauteurObjet()){return false;}
-		else{
-			return true;
-		}
-	} 
 
 	
 	public void setCollisionDroite(boolean collisionDroite) {
