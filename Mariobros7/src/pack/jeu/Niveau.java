@@ -52,6 +52,9 @@ public class Niveau extends JPanel{
 	public CubeMystere cube1;
 	public CubeMystere cube2;
 	public CubeMystere cube3;
+	public CubeMystere cube4;
+	public CubeMystere cube5;
+	public CubeMystere cube6;
 	
 	public Tuyau tuyau1;
 	public Tuyau tuyau2;
@@ -150,20 +153,23 @@ public class Niveau extends JPanel{
 		brique3 = new Brique(1290, 400);
 		brique4 = new Brique(1350, 400);
 		cube2 = new CubeMystere(1320, 400);
-		
-		brique5 = new Brique(2600, 400);
-		brique6 = new Brique(2900, 400);
-		brique7 = new Brique(3100, 400);
-		brique8 = new Brique(3300, 400);
-		//brique9 = new Brique(1500, 400);
-		
 		tuyau1 = new Tuyau(1500, 485);
 		tuyau2 = new Tuyau(1800, 485);
+		tuyau3 = new Tuyau(2100, 485);
+		brique5 = new Brique(1950, 400);
+		brique6 = new Brique(2600, 400);
+		cube4 = new CubeMystere(2630, 400);
+		brique7 = new Brique(2660, 400);
+		brique8 = new Brique(3300, 400);
+		brique9 = new Brique(3400, 400);
+		
+		
 		
 		tabObjets = new ArrayList<Objet>();
 		
 		this.tabObjets.add(this.tuyau1);
 		this.tabObjets.add(this.tuyau2);
+		this.tabObjets.add(this.tuyau3);
 		this.tabObjets.add(this.brique1);
 		this.tabObjets.add(this.brique2);
 		this.tabObjets.add(this.brique3);
@@ -176,6 +182,7 @@ public class Niveau extends JPanel{
 		this.tabObjets.add(this.cube1);
 		this.tabObjets.add(this.cube2);
 		this.tabObjets.add(this.cube3);
+		this.tabObjets.add(this.cube4);
 		
 		System.out.println(this.tuyau1.getX());
 		System.out.println(this.player.getX());
