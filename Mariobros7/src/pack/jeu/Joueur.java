@@ -5,7 +5,7 @@ public class Joueur {
 	public int xJoueur;
 	public int yJoueur;
 	public int compteurSaut;
-	private final int dureeSaut = 30;
+	private final int dureeSaut = 20;
 	private final int pause = 3;
 	private boolean marche;
 	private boolean droite;
