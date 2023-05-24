@@ -25,12 +25,11 @@ public class Niveau extends JPanel{
 	
 	public Joueur player;
 		
-	private static int xFond1;
-	private static int xFond2;
+	public static int xFond1;
+	public static int xFond2;
 	
-	private static int xFondCumule;
-	
-	private static int dx;
+	public static int xFondCumule;	
+	private int dx;
 	
 	public static int xPlayer;
 	
@@ -136,12 +135,14 @@ public class Niveau extends JPanel{
 		if (rejouer == true) {
 			Audio.playSound("/audio/partiePerdue.wav");
 		}
+		
+		
 
 
 		//Image brique = new ImageIcon(getClass().getResource("/images/Brique.png")).getImage();
 
 		brique1 = new Brique(1200, 400);
-		brique2 = new Brique(1300, 400);
+		brique2 = new Brique(1300, 300);
 		brique3 = new Brique(1400, 400);
 		brique4 = new Brique(1500, 400);
 		
@@ -155,11 +156,15 @@ public class Niveau extends JPanel{
 		this.tabObjets.add(this.brique2);
 		this.tabObjets.add(this.brique3);
 		
+		System.out.println(this.tuyau1.getX());
+		System.out.println(this.player.getX());
+		
 		g2.drawImage(this.fondDuJeu1, xFond1, 0, null); 		 	    
 		g2.drawImage(this.fondDuJeu2, xFond2, 0, null); 	
 		g2.drawImage(Mario, player.getX(), player.getY(), null);
 		for(int i = 0; i < this.tabObjets.size(); i++){
- 	 		g2.drawImage(this.tabObjets.get(i).getImageObjet(), this.tabObjets.get(i).getX()+xFond1, this.tabObjets.get(i).getY(), null);
+			this.tabObjets.get(i).deplacement();
+ 	 		g2.drawImage(this.tabObjets.get(i).getImageObjet(), this.tabObjets.get(i).getX(), this.tabObjets.get(i).getY(), null);
  	 	}	 	
 		Font font = new Font("Press Start 2P", Font.PLAIN, 20);
 		g2.setFont(font);
@@ -197,7 +202,9 @@ public class Niveau extends JPanel{
 	public void setX(int i) {
 		dx = i;
 	}
-
+	public int getDx() {
+		return dx;
+	}
 
 	public static int getHauteurPlafond(int x) {
 		return 0;
@@ -217,9 +224,7 @@ public class Niveau extends JPanel{
 		return xFond1;
 	}
 	
-	public static int getDx() {
-		return dx;
-	}
+
 
 	public int getFinalScore() {
 		return score.getNbPieces();
