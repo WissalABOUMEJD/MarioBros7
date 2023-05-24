@@ -2,11 +2,13 @@ package pack.jeu;
 
 public class Joueur {
 	
-	public static  int xJoueur;
-	public static  int yJoueur;
-	public static  int compteurSaut;
-	private static final int dureeSaut = 30;
-	private static final int pause = 3;
+	public int xJoueur;
+	public int yJoueur;
+	public int compteurSaut;
+	private final int dureeSaut = 30;
+	private final int pause = 3;
+	private boolean marche;
+	private boolean droite;
 	private boolean collisionHaut = false;
 	private boolean collisionBas = false;
 	private boolean collisionDroite = false;
@@ -15,8 +17,8 @@ public class Joueur {
 	
 	
 	
-	public static final int hauteurMario = 50;
-	public static final int largeurMario = 28;
+	public final int hauteurMario = 50;
+	public final int largeurMario = 28;
 
 
 	
@@ -25,6 +27,8 @@ public class Joueur {
 		yJoueur = y;
 		compteurSaut = 0;
 		sautEnCours = false;
+		marche = false;
+		droite = true;
 	}
 	
 	
@@ -57,6 +61,17 @@ public class Joueur {
 			sautEnCours = false;
 		}
 	}
+	
+
+    // Détection contact à droite de Mario
+    protected boolean contactAvant(Objet objet){
+	    if(this.xJoueur + this.largeurMario < objet.getX() || this.xJoueur + this.largeurMario > objet.getX() + 5 ||
+	       this.yJoueur + this.hauteurMario <= objet.getY() || this.yJoueur >= objet.getY() + objet.getHauteurObjet()){return false;}
+		else{
+			return true;
+		}
+	} 
+
 	
 	public void setCollisionDroite(boolean collisionDroite) {
 		this.collisionDroite = collisionDroite;
