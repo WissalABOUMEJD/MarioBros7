@@ -1,5 +1,5 @@
 package pack.jeu;
-
+import menu.Menu;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -23,6 +23,10 @@ public class Objet {
 		this.y = y;
 	}
 
+	public int getHauteurObjet() {
+		return hauteurObjet;
+	}
+
 	public void actionObjet() {
 	}
 
@@ -34,6 +38,12 @@ public class Objet {
 		this.y = y;
 	}
 
+	public void deplacement(){
+		if(Niveau.xFondCumule >= 0) {
+			this.x = this.x - Niveau.xFondCumule;
+		}
+		
+	}
 	public int getX() {
 		return x;
 	}
