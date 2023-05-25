@@ -9,10 +9,10 @@ public class Joueur {
 	private final int pause = 3;
 	private boolean marche;
 	private boolean droite;
-	private boolean collisionHaut = false;
-	private boolean collisionBas = false;
-	private boolean collisionDroite = false;
-	private boolean collisionGauche = false;
+	public boolean collisionHaut = false;
+	public boolean collisionBas = false;
+	public boolean collisionDroite = false;
+	public boolean collisionGauche = false;
 	public boolean sautEnCours;
 	
 	
@@ -80,13 +80,22 @@ public class Joueur {
 	}
 	
 	
+	
+	
+	
+	
+	public boolean collisionMario() {
+		return ((collisionDroite && Niveau.getDx() < 0) || (collisionGauche && Niveau.getDx() > 0));
+	}
+	
 	public void setX(int dx) {
 		xJoueur+=dx;
 	}
 	
 	public void setY(int dy) {
-		yJoueur+=dy;
-	}
+		if (! (collisionHaut && dy >0) && !(collisionBas && dy < 0)) {
+			yJoueur+=dy;
+		}	}
 
 
 	public int getX() {
