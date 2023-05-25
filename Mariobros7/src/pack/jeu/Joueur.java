@@ -79,11 +79,6 @@ public class Joueur {
 		this.collisionBas = collisionBas;
 	}
 	
-	
-	
-	
-	
-	
 	public boolean collisionMario() {
 		return ((collisionDroite && Niveau.getDx() < 0) || (collisionGauche && Niveau.getDx() > 0));
 	}
@@ -95,7 +90,8 @@ public class Joueur {
 	public void setY(int dy) {
 		if (! (collisionHaut && dy >0) && !(collisionBas && dy < 0)) {
 			yJoueur+=dy;
-		}	}
+		}
+	}
 
 
 	public int getX() {
