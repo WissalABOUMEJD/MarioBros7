@@ -29,7 +29,7 @@ public class Niveau extends JPanel{
 	public static int xFond2;
 	
 	public static int xFondCumule;	
-	private int dx;
+	private static int dx;
 	
 	public static int xPlayer;
 	
@@ -97,54 +97,6 @@ public class Niveau extends JPanel{
 		temps = new Temps();
 		score = new ScoreJeu();
 		
-		
-		this.setFocusable(true);
-		this.requestFocusInWindow();
-		this.addKeyListener(deplacement);
-
-		Thread refresh = new Thread(new FPS());
-		refresh.start();
-	}
-
-	public void majFond () {
-		if (player.getX() == 0 && dx < 0) {
-			dx = 0;
-		}
-		
-		if (player.getX() > 500 && dx > 0) {
-			xFond1 -= dx;
-			xFond2 -= dx;
-			xFondCumule += dx;
-		} else {
-			player.setX(dx);   //a changer par le x_joueur dans la classe joueur
-		} 
-
-		if (xFond1 == -longueurImage) {
-			xFond1 = longueurImage;
-		} else if (xFond2 == -longueurImage) {
-			xFond2 = longueurImage;
-		}
-	}
-	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics g2 = (Graphics2D)g;
-		
-		majFond();
-		
-		if (player.sautEnCours == true) {
-			player.sauter();
-			Audio.playSound("/audio/saut.wav");
-		}
-		
-		if (rejouer == true) {
-			Audio.playSound("/audio/partiePerdue.wav");
-		}
-		
-		cube1 = new CubeMystere(1260, 400);
-
-
-		//Image brique = new ImageIcon(getClass().getResource("/images/Brique.png")).getImage();
 
 		brique1 = new Brique(1200, 400);
 		brique2 = new Brique(1230, 400);
@@ -162,6 +114,13 @@ public class Niveau extends JPanel{
 		brique7 = new Brique(2660, 400);
 		brique8 = new Brique(3300, 400);
 		brique9 = new Brique(3400, 400);
+		
+		cube1 = new CubeMystere(1260, 400);
+
+
+		//Image brique = new ImageIcon(getClass().getResource("/images/Brique.png")).getImage();
+
+
 		
 		
 		
@@ -183,17 +142,78 @@ public class Niveau extends JPanel{
 		this.tabObjets.add(this.cube2);
 		this.tabObjets.add(this.cube3);
 		this.tabObjets.add(this.cube4);
+
 		
-		System.out.println(this.tuyau1.getX());
-		System.out.println(this.player.getX());
+		
+		this.setFocusable(true);
+		this.requestFocusInWindow();
+		this.addKeyListener(deplacement);
+
+		Thread refresh = new Thread(new FPS());
+		refresh.start();
+	}
+
+	public void majFond () {
+		if (player.getX() == 0 && dx < 0) {
+			dx = 0;
+		}
+		
+
+		if (player.getX() > 500 && dx > 0 && !player.collisionMario()) {
+			xFond1 -= dx;
+			xFond2 -= dx;
+			xFondCumule += dx;
+		} else if (!player.collisionMario()){
+			player.setX(dx);   //a changer par le x_joueur dans la classe joueur
+		} 
+
+		if (xFond1 == -longueurImage) {
+			xFond1 = longueurImage;
+		} else if (xFond2 == -longueurImage) {
+			xFond2 = longueurImage;
+		}
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Graphics g2 = (Graphics2D)g;
+		
+		
+		detectionCollision(tabObjets);
+		
+
+		
+		majFond();
+		
+		if (player.sautEnCours == true) {
+			player.sauter();
+			Audio.playSound("/audio/saut.wav");
+		}
+		
+		if (rejouer == true) {
+			Audio.playSound("/audio/partiePerdue.wav");
+		}
+		
+		player.setCollisionBas(false);
+		player.setCollisionDroite(false);
+		player.setCollisionGauche(false);
+		player.setCollisionDroite(false);
+		
+
+
 		
 		g2.drawImage(this.fondDuJeu1, xFond1, 0, null); 		 	    
 		g2.drawImage(this.fondDuJeu2, xFond2, 0, null); 	
 		g2.drawImage(Mario, player.getX(), player.getY(), null);
 		for(int i = 0; i < this.tabObjets.size(); i++){
-			this.tabObjets.get(i).deplacement();
- 	 		g2.drawImage(this.tabObjets.get(i).getImageObjet(), this.tabObjets.get(i).getX(), this.tabObjets.get(i).getY(), null);
+ 	 		g2.drawImage(this.tabObjets.get(i).getImageObjet(), deplacement(this.tabObjets.get(i)), this.tabObjets.get(i).getY(), null);
  	 	}	 	
+		
+
+
+		
+		
+		
 		Font font = new Font("Press Start 2P", Font.PLAIN, 20);
 		g2.setFont(font);
 		g2.drawString(this.temps.getTempsRestant(), 5, 25);
@@ -201,19 +221,33 @@ public class Niveau extends JPanel{
 
 	}
 	
-	public void detectionCollision (Objet[] objets) {
+	public int deplacement(Objet o){
+		if(Niveau.xFondCumule >= 0) {
+			return o.getX() - Niveau.xFondCumule;
+		} else {
+			return o.getX();
+		}
+	}
+
+	public void detectionCollision (ArrayList<Objet> tabObjets) {
 		Collision collision = null;
-		Rectangle rectangleMario = new Rectangle(player.getX(),player.getY(),player.largeurMario,player.hauteurMario);
-		for (Objet o : objets) {
-			Rectangle rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet,o.hauteurObjet);
+		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 2,player.hauteurMario);
+		for (Objet o : tabObjets) {
+			Rectangle rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+2,o.hauteurObjet);
 			boolean touché = rectangleMario.intersects(rectangleObjet);
 			if (touché) {
-				if (o.getX() == player.getX()) {
+				System.out.print(o);
+				System.out.println(player.getX() + xFondCumule + player.largeurMario - o.largeurObjet);
+				if (o.getX() == player.getX() + xFondCumule + player.largeurMario) {
 					collision = Collision.Gauche;
 					player.setCollisionGauche(true);
-				} else if (o.getX() + o.largeurObjet == player.getX()) {
+					System.out.println("gauche");
+
+				} else if (o.getX() + o.largeurObjet == player.getX() + xFondCumule) {
 					collision = Collision.Droite;
 					player.setCollisionDroite(true);
+					System.out.println("droite");
+
 				} else if (o.getY() == player.getY()) {
 					collision = Collision.Bas;
 					player.setCollisionBas(true);
@@ -230,7 +264,7 @@ public class Niveau extends JPanel{
 	public void setX(int i) {
 		dx = i;
 	}
-	public int getDx() {
+	public static int getDx() {
 		return dx;
 	}
 
