@@ -33,7 +33,7 @@ public class Joueur {
 	
 	public void tomber() {
 		if (!collisionBas && !sautEnCours) {
-			//setY(8);
+			setY(8);
 		}
 	}
 	
