@@ -35,6 +35,12 @@ public class Menu extends JFrame {
 	public static GameOver gameOverPanel;
 	public static boolean rejouer = true;
 	public static boolean lancerNiveau = false;
+	
+	// ajout par alex de image icon Image pour déplacements
+	//public ImageIcon avatar1 =new ImageIcon(niveauPanel.getClass().getResource("/images/moustache_profil_static.png")) ;
+	//public ImageIcon avatar2= new ImageIcon(niveauPanel.getClass().getResource("/images/marioo.png"));
+	//public ImageIcon avatar3=;
+			
     /**
      * Creates new form fenetrePrincipale
      */
@@ -199,19 +205,21 @@ public class Menu extends JFrame {
     }                                         
 
     static void avatar1MouseClicked(java.awt.event.MouseEvent evt) {
-        niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/moustache_profil_static.png")));
+    	
+        niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/moustache_profil_static.png")),"/images/moustache_profil_static.png");
         niveauPanel.temps.setCompteurTemps(niveauPanel.temps.getCompteurTempsInitial());
     	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel);
     }
     
     static void avatar2MouseClicked(java.awt.event.MouseEvent evt) {
-    	niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/marioo.png")));
+    	
+    	niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/cregut_static_droit.png")),"/images/cregut_static_droit.png");
     	niveauPanel.temps.setCompteurTemps(niveauPanel.temps.getCompteurTempsInitial());
     	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel);
     }
     
     static void avatar3MouseClicked(java.awt.event.MouseEvent evt) {
-    	niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/modifmario_arefaire.png")));
+    	niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/modifmario_arefaire.png")),"/images/modifmario_arefaire.png");
     	niveauPanel.temps.setCompteurTemps(niveauPanel.temps.getCompteurTempsInitial());
     	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel);
     }
@@ -292,7 +300,6 @@ public class Menu extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Menu fenetre = new Menu();
-		fenetre.setSize(1700,678);
                 fenetre.setVisible(true);
             }
         });

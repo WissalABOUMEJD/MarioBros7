@@ -40,7 +40,7 @@ public class Jouer extends JPanel{
             }
         });
 
-        avatar2.setIcon(new ImageIcon(getClass().getResource("/images/marioo.png")));
+        avatar2.setIcon(new ImageIcon(getClass().getResource("/images/cregut_static_droit.png")));
         add(avatar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, -1, -1));
         
         avatar2.addMouseListener(new java.awt.event.MouseAdapter() {
