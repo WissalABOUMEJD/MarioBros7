@@ -38,12 +38,6 @@ public class Objet {
 		this.y = y;
 	}
 
-	public void deplacement(){
-		if(Niveau.xFondCumule >= 0) {
-			this.x = this.x - Niveau.xFondCumule;
-		}
-		
-	}
 	public int getX() {
 		return x;
 	}
