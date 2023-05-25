@@ -292,6 +292,7 @@ public class Menu extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Menu fenetre = new Menu();
+		fenetre.setSize(1700,678);
                 fenetre.setVisible(true);
             }
         });
