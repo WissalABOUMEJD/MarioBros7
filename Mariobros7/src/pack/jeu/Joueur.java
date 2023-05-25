@@ -1,4 +1,5 @@
 package pack.jeu;
+import menu.Menu;
 
 public class Joueur {
 	
@@ -19,7 +20,11 @@ public class Joueur {
 	
 	public final int hauteurMario = 48;
 	public final int largeurMario = 32;
-
+	
+	//pour les fonctions courir 
+	public int compteurMarche;
+	public boolean marcheGaucheEnCours;
+	public boolean marcheDroiteEnCours;
 
 	
 	public Joueur(int x, int y) {
@@ -33,7 +38,7 @@ public class Joueur {
 	
 	public void tomber() {
 		if (!collisionBas && !sautEnCours) {
-			setY(8);
+			//setY(8);
 		}
 	}
 	
@@ -65,6 +70,45 @@ public class Joueur {
 			}
 		}
 	}
+	
+	public void courirdroite() {
+		//mise en place d'un compteur/retardataire pour l'affichage bonhomme qui court
+		int dureeMax=30;
+		Menu.niveauPanel.setX(Deplacement.vitesseDeplacement/2);
+		if(compteurMarche < dureeMax) {
+			compteurMarche ++;
+		}else if (compteurMarche == dureeMax) {
+			
+			compteurMarche ++;
+		}else {
+			
+			compteurMarche=0;
+			marcheDroiteEnCours=false;
+			
+		}
+		
+	}
+	
+	public void courirgauche() {
+		//mise en place d'un compteur/retardataire pour l'affichage bonhomme qui court
+		int dureeMax=30;
+		Menu.niveauPanel.setX(-Deplacement.vitesseDeplacement/2);
+		if(compteurMarche < dureeMax) {
+			compteurMarche ++;
+		}else if (compteurMarche == dureeMax) {
+			
+			compteurMarche ++;
+		}else {
+			
+			compteurMarche=0;
+			
+			marcheGaucheEnCours=false;
+		}
+		
+	}
+	
+	
+	
 	
 
 	

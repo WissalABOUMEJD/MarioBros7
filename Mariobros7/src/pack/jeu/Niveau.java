@@ -82,6 +82,10 @@ public class Niveau extends JPanel{
 	public ScoreJeu score;
 	public Deplacement deplacement = new Deplacement();
 	public boolean rejouer; 
+	
+	//image pour changement de joueur
+	private ImageIcon avatar_en_cours;// image de l'avartar qui est affiché lorque que l'on joue et va etre modifié en fonction des déplacements
+	private int compteurmarche;
 
 	public Niveau() {
 		super();
@@ -104,7 +108,7 @@ public class Niveau extends JPanel{
 		MarioImg = new ImageIcon(getClass().getResource("/images/modifmario_arefaire.png"));
 		Mario = MarioImg.getImage();
 		
-		LavaImg = new ImageIcon(getClass().getResource("/images/Lava-Transparent1.png"));
+		LavaImg = new ImageIcon(getClass().getResource("/images/Lava-Transparent4.png"));
 		Lava = LavaImg.getImage();
 		
 		lava = new Lava(1588, 550);
@@ -212,6 +216,31 @@ public class Niveau extends JPanel{
 			player.sauter();
 			Audio.playSound("/audio/saut.wav");
 		}
+		// ajout des marhce droite, gauche,saut ect
+		if (player.marcheDroiteEnCours == true ) {
+			if(compteurmarche%2==0) {
+				//Mario = Mario_marcheDroiteImg.getImage();
+				compteurmarche++;
+			}else {
+				Mario = MarioImg.getImage();
+				compteurmarche++;
+			}
+			player.courirdroite();
+			//MarioImg=MarioDroiteImg;
+	}
+		
+		if (player.marcheGaucheEnCours == true) {
+			if(compteurmarche%2==0) {
+				//Mario = Mario_marcheGaucheImg.getImage();
+				compteurmarche++;
+			}else {
+				//Mario = MarioGaucheImg.getImage();
+				compteurmarche++;
+			}
+			player.courirgauche();
+			//MarioImg=MarioGaucheImg;
+		}
+		
 		
 		if (rejouer == true) {
 			Audio.playSound("/audio/partiePerdue.wav");

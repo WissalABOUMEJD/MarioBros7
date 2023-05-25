@@ -11,7 +11,7 @@ public class Deplacement implements KeyListener {
 	
 
 	
-	private final static int vitesseDeplacement = 4;   //Attention ce nombre doit diviser 1644.
+	public final static int vitesseDeplacement = 4;   //Attention ce nombre doit diviser 1644.
 	
 
 	@Override
@@ -19,10 +19,16 @@ public class Deplacement implements KeyListener {
         int keyCode = e.getKeyCode();
         if (keyCode == KeyEvent.VK_LEFT) {
         	left = true;
-            Menu.niveauPanel.setX(-vitesseDeplacement);       
+            //Menu.niveauPanel.setX(-vitesseDeplacement);   
+        	if (Menu.niveauPanel.player.marcheGaucheEnCours == false) {
+        		Menu.niveauPanel.player.marcheGaucheEnCours = true;
+        	}
         }  
         if (keyCode == KeyEvent.VK_RIGHT) {
-        	Menu.niveauPanel.setX(vitesseDeplacement);
+        	if (Menu.niveauPanel.player.marcheDroiteEnCours == false) {
+        		Menu.niveauPanel.player.marcheDroiteEnCours = true;
+        	}
+        	//Menu.niveauPanel.setX(vitesseDeplacement);
         	right = true;
         }
         if (keyCode == KeyEvent.VK_UP) {
