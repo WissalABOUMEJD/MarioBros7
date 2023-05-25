@@ -11,7 +11,7 @@ public class Brique extends Objet{
 	private static boolean afficher;
 	
 	public Brique(int x, int y) {
-		super(40, 40, x, y);
+		super(32, 32, x, y);
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/bloc.png"));
 		super.imageObjet = this.icoObjet.getImage();
 		afficher = true;
