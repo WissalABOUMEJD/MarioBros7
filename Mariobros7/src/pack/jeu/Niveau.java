@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import audioMario.Audio;
+
 import menu.Menu;
 
 import java.awt.Rectangle;
@@ -84,7 +85,13 @@ public class Niveau extends JPanel{
 	public boolean rejouer; 
 	
 	//image pour changement de joueur
-	private ImageIcon avatar_en_cours;// image de l'avartar qui est affiché lorque que l'on joue et va etre modifié en fonction des déplacements
+	// elle seront définit dans la méthode setMario
+	private ImageIcon saut_droite;
+	private ImageIcon saut_gauche;
+	private ImageIcon marche_droite;
+	private ImageIcon marche_gauche;
+	private ImageIcon static_droite;
+	private ImageIcon static_gauche;
 	private int compteurmarche;
 
 	public Niveau() {
@@ -104,6 +111,7 @@ public class Niveau extends JPanel{
 		
 		fondDuJeuImg2 = new ImageIcon(getClass().getResource("/images/FondProvisoire2.png"));
 		fondDuJeu2 =fondDuJeuImg2.getImage();
+		
 		
 		MarioImg = new ImageIcon(getClass().getResource("/images/modifmario_arefaire.png"));
 		Mario = MarioImg.getImage();
@@ -215,31 +223,41 @@ public class Niveau extends JPanel{
 		if (player.sautEnCours == true) {
 			player.sauter();
 			Audio.playSound("/audio/saut.wav");
+			if(MarioImg==static_gauche) {
+				Mario = saut_gauche.getImage();
+			}else {
+				Mario = saut_droite.getImage();
+			}
+			
 		}
 		// ajout des marhce droite, gauche,saut ect
-		if (player.marcheDroiteEnCours == true ) {
+		else if (player.marcheDroiteEnCours == true ) {
 			if(compteurmarche%2==0) {
-				//Mario = Mario_marcheDroiteImg.getImage();
+				Mario = marche_droite.getImage(); //on alterne l'image de mario qui court et mario normal pour fairel'illusion qu'il court
 				compteurmarche++;
 			}else {
 				Mario = MarioImg.getImage();
 				compteurmarche++;
 			}
 			player.courirdroite();
-			//MarioImg=MarioDroiteImg;
+			MarioImg=static_droite;// on remet le amrio static droit une fois qu'il arrete de courir
 	}
 		
-		if (player.marcheGaucheEnCours == true) {
+		else if (player.marcheGaucheEnCours == true) {
 			if(compteurmarche%2==0) {
-				//Mario = Mario_marcheGaucheImg.getImage();
+				Mario = marche_gauche.getImage();
 				compteurmarche++;
 			}else {
-				//Mario = MarioGaucheImg.getImage();
+				Mario = MarioImg.getImage();
 				compteurmarche++;
 			}
 			player.courirgauche();
-			//MarioImg=MarioGaucheImg;
+			MarioImg=static_gauche;
+		}else {
+			Mario = MarioImg.getImage();
+			compteurmarche=0;
 		}
+		
 		
 		
 		if (rejouer == true) {
@@ -346,9 +364,45 @@ public class Niveau extends JPanel{
 		return 500;
 	}
 	
-	public void setMario(ImageIcon NewImg) {
+	public void setMario(ImageIcon NewImg,String url) {
+		//on créer 2 images icon pour pouvoir choisir les images qu'on donne aux déplacments voir if et else juste après
+		ImageIcon avatar1=new ImageIcon(Menu.niveauPanel.getClass().getResource("/images/moustache_profil_static.png"));
+		ImageIcon avatar2=new ImageIcon(Menu.niveauPanel.getClass().getResource("/images/cregut_static_droit.png"));
+		
 		this.MarioImg = NewImg;
 		this.Mario = NewImg.getImage();
+		if (url =="/images/moustache_profil_static.png") {
+			// on charge les images pour le gars à la moustache
+			this.marche_droite = new ImageIcon(getClass().getResource("/images/moustache_profil_marche.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));;
+			this.static_droite =avatar1;
+			this.static_gauche=avatar1;//ACHANGER!!!!
+		}
+		else if(url =="/images/moustache_profil_static.png") {
+			//on charge les images pour le perso vert
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche.png"));
+			this.static_droite =avatar2;
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche.png"));
+		}else {
+			//this.marche_droite = ;
+			//this.marche_gauche =;
+			//this.saut_droite =;
+			//this.saut_gauche=;
+			//this.static_droite =;
+			//this.static_gauche=;
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche.png"));
+			this.static_droite =avatar2;
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche.png"));
+		}
+		
 	}
 	
 	public static int getxFond1() {
