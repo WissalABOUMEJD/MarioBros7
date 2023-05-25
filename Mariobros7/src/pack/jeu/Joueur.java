@@ -17,8 +17,8 @@ public class Joueur {
 	
 	
 	
-	public final int hauteurMario = 50;
-	public final int largeurMario = 28;
+	public final int hauteurMario = 48;
+	public final int largeurMario = 32;
 
 
 	
@@ -31,36 +31,41 @@ public class Joueur {
 		droite = true;
 	}
 	
+	public void tomber() {
+		if (!collisionBas && !sautEnCours) {
+			//setY(8);
+		}
+	}
+	
 	
 	public void sauter() {
 		//phase Montante du saut
 		if (compteurSaut < dureeSaut) {
-			if (getY() < Niveau.getHauteurPlafond(getX())) { //si on percute le plafond
+			if (collisionHaut) {
 				compteurSaut = dureeSaut;
 			} else {
-			setY(-8);
-			compteurSaut++;
+				setY(-8);
+				compteurSaut++;
 			}
+			
 		}
 		// phase de pause
-		else if (compteurSaut < dureeSaut + pause) {
+		if (compteurSaut < dureeSaut + pause) {
 			compteurSaut++;
 		}
 		// phase descendante
-		else if (compteurSaut < 2*dureeSaut + pause) {
-			if (getY() > Niveau.getHauteurSol(getX())) { //si on percute le plafond
-				compteurSaut = 2*dureeSaut;
+		
+		
+		if (compteurSaut >= dureeSaut + pause) {
+			if (collisionBas || getY() >= Niveau.getHauteurSol(getX())) {
+				compteurSaut = 0;
+				sautEnCours = false;
 			} else {
-			setY(8);
-			compteurSaut++;
+				setY(8);
 			}
 		}
-		
-		else {
-			compteurSaut = 0;
-			sautEnCours = false;
-		}
 	}
+	
 
 	
 	public void setCollisionDroite(boolean collisionDroite) {
@@ -88,9 +93,7 @@ public class Joueur {
 	}
 	
 	public void setY(int dy) {
-		if (! (collisionHaut && dy >0) && !(collisionBas && dy < 0)) {
-			yJoueur+=dy;
-		}
+		yJoueur+=dy;
 	}
 
 
