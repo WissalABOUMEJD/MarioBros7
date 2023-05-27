@@ -93,7 +93,8 @@ public class Niveau extends JPanel{
 	private ImageIcon static_droite;
 	private ImageIcon static_gauche;
 	private int compteurmarche;
-
+	/**Constructeur de la classe niveau
+	*/
 	public Niveau() {
 		super();
 		System.out.println("test");
@@ -187,7 +188,9 @@ public class Niveau extends JPanel{
 		Thread refresh = new Thread(new FPS());
 		refresh.start();
 	}
-
+	/**Procédure de mise à a jour du fond de jeu (faire avancer personnage,afichage,mouvements ect)
+	*MAJ faite toutes les 0,2s
+	*/
 	public void majFond () {
 		if (player.getX() == 0 && dx < 0) {
 			dx = 0;
@@ -208,7 +211,9 @@ public class Niveau extends JPanel{
 			xFond2 = longueurImage;
 		}
 	}
-	
+	/** Permet de chaner les images de l'avartar en fonction de ses déplacements
+	*@param g A ECRIRE
+	*/
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics g2 = (Graphics2D)g;
@@ -363,7 +368,10 @@ public class Niveau extends JPanel{
 	public static int getHauteurSol(int x) {
 		return 500;
 	}
-	
+	/** Permet de trnascire l'avatar choisi dans le menu lors du choix des avatars dans le niveau directement
+	* @param NewImg image que l'utilisateur à choisit pour le niveau
+	* @param url localisation de l'image dans les fichiers pourvoir selectionner toutes les autres images de mouvements correspondant à ce personnage
+	*/
 	public void setMario(ImageIcon NewImg,String url) {
 		//on créer 2 images icon pour pouvoir choisir les images qu'on donne aux déplacments voir if et else juste après
 		ImageIcon avatar1=new ImageIcon(Menu.niveauPanel.getClass().getResource("/images/moustache_profil_static.png"));
@@ -410,11 +418,14 @@ public class Niveau extends JPanel{
 	}
 	
 
-
+	/**Obtenir le score final que le joueur à atteint
+	* @return entier correspond au nombre de coin gagner
+	*/
 	public int getFinalScore() {
 		return score.getNbPieces();
 	}
-	
+	/** Redémare un niveau en remplacent le joueur au niveau de départ
+	*/
 	public void rejouer() {
 		rejouer = true;
 		player = new Joueur(0,500);
