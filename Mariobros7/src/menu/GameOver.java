@@ -47,6 +47,14 @@ public class GameOver extends JPanel{
 	public JLabel getjLabel() {
 		return jLabel20;
 	}
+
+	public JButton getRetourGameOverButton() {
+		return retourGameOverButton;
+	}
+
+	public void setRetourGameOverButton(JButton retourGameOverButton) {
+		this.retourGameOverButton = retourGameOverButton;
+	}
 	
 
 }
