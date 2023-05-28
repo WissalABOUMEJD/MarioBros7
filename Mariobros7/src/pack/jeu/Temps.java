@@ -60,6 +60,6 @@ public class Temps implements Runnable {
         }
         //Audio.playSound("/audio/partiePerdue.wav");
         Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
-                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel);
+                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
     }
 }
