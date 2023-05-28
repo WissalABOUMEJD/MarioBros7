@@ -42,7 +42,7 @@ public class Joueur {
 	
 	public void tomber() {
 		if (!collisionBas && !sautEnCours) {
-			//setY(8);
+			setY(16);
 		}
 	}
 	
@@ -53,7 +53,7 @@ public class Joueur {
 			if (collisionHaut) {
 				compteurSaut = dureeSaut;
 			} else {
-				setY(-15);
+				setY(-16);
 				compteurSaut++;
 			}
 			
@@ -70,7 +70,7 @@ public class Joueur {
 				compteurSaut = 0;
 				sautEnCours = false;
 			} else {
-				setY(15);
+				setY(16);
 			}
 		}
 	}

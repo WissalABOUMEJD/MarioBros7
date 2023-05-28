@@ -9,7 +9,7 @@ private static final Collision Bas = null;
 	private static boolean afficher;
 
 	public Ground(int x, int y) {
-		super(40, 40, x, y);
+		super(1568, 64, x, y);
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/ground.png"));
 		super.imageObjet = this.icoObjet.getImage();
 		afficher = true;

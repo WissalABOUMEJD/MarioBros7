@@ -45,6 +45,7 @@ public class Niveau extends JPanel{
 	private static final int longueurImage = 1632;
 	private static final int largeurImage = 1632;
 	//ajout des briques
+	public Brique briquetest;
 	public Brique brique1;
 	public Brique brique2;
 	public Brique brique3;
@@ -128,20 +129,22 @@ public class Niveau extends JPanel{
 		LavaImg = new ImageIcon(getClass().getResource("/images/Lava-Transparent4.png"));
 		Lava = LavaImg.getImage();
 		
-		lava = new Lava(1588, 550);
-		ground = new Ground(0, 550);
-		ground2 = new Ground(1816, 550);
+		lava = new Lava(1588, 548);
+		ground = new Ground(0, 548);
+		ground2 = new Ground(1816, 548);
 		GroundImg = new ImageIcon(getClass().getResource("/images/ground.png"));
 		Ground = GroundImg.getImage();
 		
 		
-		player = new Joueur(0,500);
+		player = new Joueur(0,452);
 		temps = new Temps();
 		score = new ScoreJeu();
 		
 		//instanciantion des objets
 		brique1 = new Brique(1200, 404);
 		brique2 = new Brique(1230, 404);
+		briquetest = new Brique(0, 0);
+
 		cube1 = new CubeMystere(1260, 404);
 		cube3 = new CubeMystere(1280, 250);
 		brique3 = new Brique(1290, 404);
@@ -179,6 +182,8 @@ public class Niveau extends JPanel{
 		this.tabObjets.add(this.tuyau1);
 		this.tabObjets.add(this.tuyau2);
 		this.tabObjets.add(this.tuyau3);
+		this.tabObjets.add(this.briquetest);
+
 		this.tabObjets.add(this.brique1);
 		this.tabObjets.add(this.brique2);
 		this.tabObjets.add(this.brique3);
@@ -203,7 +208,8 @@ public class Niveau extends JPanel{
 		this.tabPieces.add(this.piece5);
 		this.tabPieces.add(this.piece6);
 		
-		
+		this.tabObjets.add(this.ground);
+		this.tabObjets.add(this.ground2);
 		
 		this.setFocusable(true);
 		this.requestFocusInWindow();
@@ -306,7 +312,7 @@ public class Niveau extends JPanel{
 		player.setCollisionBas(false);
 		player.setCollisionDroite(false);
 		player.setCollisionGauche(false);
-		player.setCollisionDroite(false);
+		player.setCollisionHaut(false);
 		
 
 
@@ -342,51 +348,55 @@ public class Niveau extends JPanel{
 
 	public void detectionCollision (ArrayList<Objet> tabObjets) {
 		Collision collision = null;
-		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 2,player.hauteurMario);
+		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 		for (Objet o : tabObjets) {
 			Rectangle rectangleObjet;
 			if (o instanceof Lava) {
 				rectangleObjet = new Rectangle(o.getX(),540,o.largeurObjet+2,o.hauteurObjet);
 			} else {
-				rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+2,o.hauteurObjet);
+				rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
 			}
 			boolean touché = rectangleMario.intersects(rectangleObjet);
+
+			
 			
 			if (touché) {
 				System.out.println(o);
-				System.out.println(o.getY()- o.hauteurObjet);
-				System.out.println(player.getY());
+				System.out.println(o.getY() + o.hauteurObjet*1.5);
+				System.out.println(player.getY() + player.hauteurMario);
+
+
 				if (o instanceof Lava) {
 					Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
 			                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel);
 				}
-				if (o.getX() == player.getX() + xFondCumule + player.largeurMario) {
+				if (o.getX() == player.getX() + xFondCumule + player.largeurMario && player.getY() + player.hauteurMario != o.getY()) {
 					collision = Collision.Gauche;
 					player.setCollisionGauche(true);
 					System.out.println("gauche");
 					o.actionObjet(collision);
 
-				} if (o.getX() + o.largeurObjet == player.getX() + xFondCumule) {
+				} else if (o.getX() + o.largeurObjet == player.getX() + xFondCumule && player.getY() + player.hauteurMario != o.getY()) {
 					collision = Collision.Droite;
 					player.setCollisionDroite(true);
 					System.out.println("droite");
 					o.actionObjet(collision);
 
-
-				} if (o.getY() - o.hauteurObjet  == player.getY() - player.hauteurMario/2) {
+				}  else if (player.getY() + player.hauteurMario == o.getY() ){
 					collision = Collision.Bas;
 					player.setCollisionBas(true);
 					System.out.println("collisionbaaaaaas");
 					o.actionObjet(collision);
-
 					
-				} if (o.getY() +o.hauteurObjet == player.getY()) { //peut être à modifier en changeant le signe
+				} else { //peut être à modifier en changeant le signe
 					collision = Collision.Haut;      
 					player.setCollisionHaut(true);
 					o.actionObjet(collision);
 					System.out.println("collisionhauuuuuuuuut");
-				}
+					
+				
 			}
+		}
 		}
 		
 	}
