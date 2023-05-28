@@ -88,7 +88,6 @@ public class Niveau extends JPanel{
 	private ArrayList<Objet> tabObjets; // tableau qui enregistre tous les objets du jeu
 	private ArrayList<Piece> tabPieces; // tableau qui enregistre tous les pices du niveau
 	
-	
 	public Temps temps;
 	public ScoreJeu score;
 	public Deplacement deplacement = new Deplacement();
@@ -265,7 +264,7 @@ public class Niveau extends JPanel{
 		for(int i=0;i< this.tabPieces.size();i++) {
 			if(player.contactPiece(tabPieces.get(i))==true) {
 				this.tabPieces.remove(i);
-			this.score.setNbrePieces(this.score.getNbPieces() + 1);
+				this.score.setNbrePieces(this.score.getNbPieces() + 1);
 		}
 		}
 		
@@ -478,9 +477,13 @@ public class Niveau extends JPanel{
 	public int getFinalScore() {
 		return score.getNbPieces();
 	}
+	
 	/** Redémare un niveau en remplacent le joueur au niveau de départ
 	*/
 	public void rejouer() {
+		int resoudre = getFinalScore();
+        String scoreFinal = String.valueOf(resoudre);
+        Menu.scorePanel.setjTextField1(scoreFinal);
 		rejouer = true;
 		player = new Joueur(0,500);
 		
