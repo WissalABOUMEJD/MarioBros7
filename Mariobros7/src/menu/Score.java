@@ -59,6 +59,14 @@ public class Score extends JPanel{
         return jTextField1;
     }
 	
+	public JTextField getjTextField1() {
+		return jTextField1;
+	}
+
+	public void setjTextField1(String text) {
+	    this.jTextField1.setText(text);
+	}
+
 	public JLabel getLabel11() {
 		return jlabel11;
 	}
