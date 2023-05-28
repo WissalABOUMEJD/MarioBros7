@@ -88,6 +88,7 @@ public class Niveau extends JPanel{
 	private ArrayList<Objet> tabObjets; // tableau qui enregistre tous les objets du jeu
 	private ArrayList<Piece> tabPieces; // tableau qui enregistre tous les pices du niveau
 	
+	public Chateau chateau;
 	public Temps temps;
 	public ScoreJeu score;
 	public Deplacement deplacement = new Deplacement();
@@ -171,7 +172,7 @@ public class Niveau extends JPanel{
 		piece4 = new Piece(1350,370);
 		piece5 = new Piece(1950,370);
 		piece6 = new Piece(2660,370);
-		
+		chateau = new Chateau(3800,404);
 
 
 		//Image brique = new ImageIcon(getClass().getResource("/images/Brique.png")).getImage();
@@ -268,6 +269,11 @@ public class Niveau extends JPanel{
 		}
 		}
 		
+		if(player.contactChateau(chateau)) {
+			Menu.showPanels(Menu.gagnerPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
+	                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gameOverPanel);
+		}
+		
 		// Changement de position des personnages
 		if (player.sautEnCours == true) {
 			player.sauter();
@@ -281,42 +287,33 @@ public class Niveau extends JPanel{
 		}
 		// ajout des marhce droite, gauche,saut ect
 		else if (player.marcheDroiteEnCours == true ) {
-			if(compteurmarche%3==0) {
-				
-				compteurmarche++;
-				Mario = MarioImg.getImage();
-			}else {
+			if(compteurmarche%2==0) {
 				Mario = marche_droite.getImage(); //on alterne l'image de mario qui court et mario normal pour fairel'illusion qu'il court
 				compteurmarche++;
+			}else {
+				Mario = MarioImg.getImage();
+				compteurmarche++;
 			}
-			if(compteurmarche%30==0) {
-				player.marcheDroiteEnCours=false;
-			}
-			
 			//player.courirdroite();
+			
 			MarioImg=static_droite;// on remet le amrio static droit une fois qu'il arrete de courir
 	}
 		
 		
 		else if (player.marcheGaucheEnCours == true) {
-			if(compteurmarche%5==0) {
-				
-				Mario = MarioImg.getImage();
+			if(compteurmarche%2==0) {
+				Mario = marche_gauche.getImage();
 				compteurmarche++;
 			}else {
-				Mario = marche_gauche.getImage();
+				Mario = MarioImg.getImage();
 				compteurmarche++;
 			}
 			//player.courirgauche();
 			MarioImg=static_gauche;
-			if(compteurmarche%30==0) {
-				player.marcheGaucheEnCours=false;
-			}
 		}else {
 			Mario = MarioImg.getImage();
 			compteurmarche=0;
 		}
-		
 		
 		
 		
@@ -336,6 +333,7 @@ public class Niveau extends JPanel{
 		g2.drawImage(this.fondDuJeu1, xFond1, 0, null); 		 	    
 		g2.drawImage(this.fondDuJeu2, xFond2, 0, null); 	
 		g2.drawImage(Mario, player.getX(), player.getY(), null);
+		g2.drawImage(chateau.getImageObjet(), deplacement(chateau), chateau.getY(), null);
 		g2.drawImage(Ground, deplacement(ground), ground.getY(), null);
 		g2.drawImage(Ground, deplacement(ground2), ground2.getY(), null);
 		//Image des objets
@@ -372,16 +370,11 @@ public class Niveau extends JPanel{
 				rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
 			}
 			boolean touché = rectangleMario.intersects(rectangleObjet);
-
-			
-			
+	
 			if (touché) {
-				
-
-
 				if (o instanceof Lava) {
 					Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
-			                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel);
+			                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
 				}
 				if (o.getX() == player.getX() + xFondCumule + player.largeurMario && player.getY() + player.hauteurMario != o.getY()) {
 					collision = Collision.Gauche;
@@ -498,6 +491,7 @@ public class Niveau extends JPanel{
 		
 		temps = new Temps();
 		deplacement.stopJoueur();
+		score.setNbrePieces(0);
 		xFond1 = 0;
 		xFond2 = longueurImage; // Les deux images sont en longueurImagex824 pixels.
 		
