@@ -26,7 +26,7 @@ public class Score extends JPanel{
 		
 		setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-		Menu.setButton(meilleurScore, "Ton meilleur score est");
+		Menu.setButton(meilleurScore, "Ton dernier score est");
 		meilleurScore.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
 				Menu.meilleurScoreMouseClicked(evt);
