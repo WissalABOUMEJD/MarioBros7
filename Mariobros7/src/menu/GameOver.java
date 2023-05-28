@@ -25,7 +25,7 @@ public class GameOver extends JPanel{
         jLabel20.setFont(new Font("Press Start 2P", 1, 60));
         jLabel20.setText("GAME OVER !");
         jLabel20.setForeground(Color.RED);
-        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, -1, 50));
+        add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, -1, 50));
 
 
         Menu.setButton(retourGameOverButton, "Rejouer?");
@@ -34,9 +34,9 @@ public class GameOver extends JPanel{
                 Menu.retourGameOverButtonMouseClicked(evt);
             }
         });
-        add(retourGameOverButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 600, -1, 50));
+        add(retourGameOverButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 500, -1, 50));
         
-        jlabel36.setIcon(new ImageIcon(getClass().getResource("/images/FondProvisoire1.jpg")));
+        jlabel36.setIcon(new ImageIcon(getClass().getResource("/images/FondProvisoire2.png")));
 	    add(jlabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1650, 830));
 	}
 
