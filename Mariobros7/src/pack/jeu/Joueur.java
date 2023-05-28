@@ -8,7 +8,7 @@ public class Joueur {
 	public int xJoueur;
 	public int yJoueur;
 	public int compteurSaut;
-	private final int dureeSaut = 20;
+	private final int dureeSaut = 30;
 	private final int pause = 3;
 	private boolean marche;
 	private boolean droite;
@@ -101,17 +101,17 @@ public class Joueur {
 		int dureeMax=30;
 		if(this.sautEnCours==false) { // on se déplace que quand saut n'est pas en cours
 			Menu.niveauPanel.setX(-Deplacement.vitesseDeplacement/2);
-			//if(compteurMarche < dureeMax) {
-				//compteurMarche ++;
-			//}else if (compteurMarche == dureeMax) {
+			if(compteurMarche < dureeMax) {
+				compteurMarche ++;
+			}else if (compteurMarche == dureeMax) {
 				
-			//	compteurMarche ++;
-			//}else {
+				compteurMarche ++;
+			}else {
 				
-				//compteurMarche=0;
+				compteurMarche=0;
 				
-				//marcheGaucheEnCours=false;
-			//}
+				marcheGaucheEnCours=false;
+			}
 		}
 		
 		
@@ -128,6 +128,17 @@ public class Joueur {
 		Rectangle rectangleObjet;
 			
 		rectangleObjet = new Rectangle(piece.getX(),piece.getY(),piece.largeurObjet+2,piece.hauteurObjet);
+			
+		return rectangleMario.intersects(rectangleObjet);
+	}
+	
+	public boolean contactChateau(Chateau chateau) {
+		
+		Rectangle rectangleMario = new Rectangle(this.getX()+Menu.niveauPanel.xFondCumule ,this.getY(),this.largeurMario + 2,this.hauteurMario);
+		
+		Rectangle rectangleObjet;
+			
+		rectangleObjet = new Rectangle(chateau.getX(),chateau.getY(),chateau.largeurObjet+2,chateau.hauteurObjet);
 			
 		return rectangleMario.intersects(rectangleObjet);
 	}
