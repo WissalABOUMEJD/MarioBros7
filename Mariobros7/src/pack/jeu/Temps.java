@@ -8,6 +8,7 @@ public class Temps implements Runnable {
     private final int pause = 1000;
     private String tempsRestant;
     private int compteurTempsInitial; // Ajout de la variable pour stocker la valeur initiale du compteur de temps
+    public boolean isPausedTemps;
 
     public Temps() {
         this.compteurTempsInitial = 100; // Assigner la valeur initiale du compteur de temps
@@ -45,12 +46,17 @@ public class Temps implements Runnable {
     @Override
     public void run() {
         while (compteurTemps != 0) {
+        	if(!isPausedTemps) {
             try {
                 Thread.sleep(pause);
             } catch (InterruptedException e) {
             }
             this.compteurTemps--;
             this.tempsRestant = "Temps restant : " + this.compteurTemps;
+        }
+        	else {
+        		this.tempsRestant = "Temps restant : " + this.compteurTemps;
+        	}
         }
         //Audio.playSound("/audio/partiePerdue.wav");
         Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
