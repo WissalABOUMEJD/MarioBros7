@@ -44,7 +44,7 @@ public class Niveau extends JPanel{
 	
 	private static final int longueurImage = 1632;
 	private static final int largeurImage = 1632;
-	
+	//ajout des briques
 	public Brique brique1;
 	public Brique brique2;
 	public Brique brique3;
@@ -57,26 +57,34 @@ public class Niveau extends JPanel{
 	public Brique brique10;
 	public Brique brique11;
 	public Brique brique12;
-
+	//ajout des cube mystere
 	public CubeMystere cube1;
 	public CubeMystere cube2;
 	public CubeMystere cube3;
 	public CubeMystere cube4;
 	public CubeMystere cube5;
 	public CubeMystere cube6;
-	
+	//ajout des tuyaux
 	public Tuyau tuyau1;
 	public Tuyau tuyau2;
 	public Tuyau tuyau3;
 	public Tuyau tuyau4;
 	public Tuyau tuyau5;
 	public Tuyau tuyau6;
-	
+	//ajout du sol et de la lave
 	public Ground ground;
 	public Ground ground2;
 	public Lava lava;
+	//ajout des pièces
+	public Piece piece1;
+	public Piece piece2;
+	public Piece piece3;
+	public Piece piece4;
+	public Piece piece5;
+	public Piece piece6;
 	
-	private ArrayList<Objet> tabObjets;
+	private ArrayList<Objet> tabObjets; // tableau qui enregistre tous les objets du jeu
+	private ArrayList<Piece> tabPieces; // tableau qui enregistre tous les pices du niveau
 	
 	
 	public Temps temps;
@@ -131,7 +139,7 @@ public class Niveau extends JPanel{
 		temps = new Temps();
 		score = new ScoreJeu();
 		
-
+		//instanciantion des objets
 		brique1 = new Brique(1200, 404);
 		brique2 = new Brique(1230, 404);
 		cube1 = new CubeMystere(1260, 404);
@@ -150,6 +158,13 @@ public class Niveau extends JPanel{
 		brique9 = new Brique(3404, 404);
 		
 		cube1 = new CubeMystere(1260, 404);
+		//Instancier objet piece
+		piece1 = new Piece(1230,370);
+		piece2 = new Piece(1200,370);
+		piece3 = new Piece(1290,370);
+		piece4 = new Piece(1350,370);
+		piece5 = new Piece(1950,370);
+		piece6 = new Piece(2660,370);
 		
 
 
@@ -158,7 +173,7 @@ public class Niveau extends JPanel{
 
 		
 		
-		
+		// on remplit la liste des objets
 		tabObjets = new ArrayList<Objet>();
 		
 		this.tabObjets.add(this.tuyau1);
@@ -179,6 +194,15 @@ public class Niveau extends JPanel{
 		this.tabObjets.add(this.cube4);
 		this.tabObjets.add(this.lava);
 
+		//on remplit la liste des pièces
+		tabPieces = new ArrayList<Piece>();
+		this.tabPieces.add(this.piece1);
+		this.tabPieces.add(this.piece2);
+		this.tabPieces.add(this.piece3);
+		this.tabPieces.add(this.piece4);
+		this.tabPieces.add(this.piece5);
+		this.tabPieces.add(this.piece6);
+		
 		
 		
 		this.setFocusable(true);
@@ -224,7 +248,7 @@ public class Niveau extends JPanel{
 		player.tomber();
 		
 		majFond();
-		
+		// Changement de position des personnages
 		if (player.sautEnCours == true) {
 			player.sauter();
 			Audio.playSound("/audio/saut.wav");
@@ -244,9 +268,11 @@ public class Niveau extends JPanel{
 				Mario = MarioImg.getImage();
 				compteurmarche++;
 			}
-			player.courirdroite();
+			//player.courirdroite();
+			
 			MarioImg=static_droite;// on remet le amrio static droit une fois qu'il arrete de courir
 	}
+		
 		
 		else if (player.marcheGaucheEnCours == true) {
 			if(compteurmarche%2==0) {
@@ -256,7 +282,7 @@ public class Niveau extends JPanel{
 				Mario = MarioImg.getImage();
 				compteurmarche++;
 			}
-			player.courirgauche();
+			//player.courirgauche();
 			MarioImg=static_gauche;
 		}else {
 			Mario = MarioImg.getImage();
@@ -283,10 +309,14 @@ public class Niveau extends JPanel{
 		g2.drawImage(Mario, player.getX(), player.getY(), null);
 		g2.drawImage(Ground, deplacement(ground), ground.getY(), null);
 		g2.drawImage(Ground, deplacement(ground2), ground2.getY(), null);
+		//Image des objets
 		for(int i = 0; i < this.tabObjets.size(); i++){
  	 		g2.drawImage(this.tabObjets.get(i).getImageObjet(), deplacement(this.tabObjets.get(i)), this.tabObjets.get(i).getY(), null);
  	 	}	 	
-
+		//Image des pices
+		for(int i = 0; i < this.tabPieces.size(); i++){
+ 	 		g2.drawImage(this.tabPieces.get(i).getImageObjet(), deplacement(this.tabPieces.get(i)), this.tabPieces.get(i).getY(), null);
+ 	 	}	
 		Font font = new Font("Press Start 2P", Font.PLAIN, 20);
 		g2.setFont(font);
 		g2.drawString(this.temps.getTempsRestant(), 5, 25);

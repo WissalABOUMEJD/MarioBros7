@@ -23,11 +23,17 @@ public class Deplacement implements KeyListener {
         	if (Menu.niveauPanel.player.marcheGaucheEnCours == false) {
         		Menu.niveauPanel.player.marcheGaucheEnCours = true;
         	}
+        	Menu.niveauPanel.player.courirgauche();
+        	Menu.niveauPanel.player.marcheDroiteEnCours = false;
+        	Menu.niveauPanel.player.sautEnCours = false;
         }  
         if (keyCode == KeyEvent.VK_RIGHT) {
         	if (Menu.niveauPanel.player.marcheDroiteEnCours == false) {
         		Menu.niveauPanel.player.marcheDroiteEnCours = true;
         	}
+        	Menu.niveauPanel.player.marcheGaucheEnCours = false;
+        	Menu.niveauPanel.player.sautEnCours = false;
+        	Menu.niveauPanel.player.courirdroite();
         	//Menu.niveauPanel.setX(vitesseDeplacement);
         	right = true;
         }
@@ -35,6 +41,8 @@ public class Deplacement implements KeyListener {
         	if (Menu.niveauPanel.player.sautEnCours == false) {
         		Menu.niveauPanel.player.sautEnCours = true;
         	}
+        	Menu.niveauPanel.player.marcheGaucheEnCours = false;
+        	Menu.niveauPanel.player.marcheDroiteEnCours = false;
         	sauter = true;
         }
         if (keyCode == KeyEvent.VK_DOWN) {
