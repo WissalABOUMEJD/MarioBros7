@@ -33,6 +33,7 @@ public class Menu extends JFrame {
 	public static Jouer jouerPanel;
 	public static Niveau niveauPanel;
 	public static GameOver gameOverPanel;
+	public static Gagner gagnerPanel;
 	public static boolean rejouer = true;
 	public static boolean lancerNiveau = false;
 	
@@ -58,6 +59,7 @@ public class Menu extends JFrame {
         jouerPanel.setVisible(false);
         niveauPanel.setVisible(false);
         gameOverPanel.setVisible(false);
+        gagnerPanel.setVisible(false);
     }
                       
     public void initComponents() {
@@ -83,6 +85,7 @@ public class Menu extends JFrame {
         retourAvatarButton = jouerPanel.getRetourButton();
         niveauPanel = new Niveau();
         gameOverPanel = new GameOver();
+        gagnerPanel = new Gagner();
         
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -121,6 +124,11 @@ public class Menu extends JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(gameOverPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)))
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(gagnerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(6, 6, 6)))
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -162,6 +170,11 @@ public class Menu extends JFrame {
                             .addComponent(gameOverPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGap(6, 6, 6)))
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(gagnerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(6, 6, 6)))
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jouerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -171,7 +184,7 @@ public class Menu extends JFrame {
         pack();
     }      
     
-    public static void showPanels(JPanel showPanel, JPanel hidePanel1, JPanel hidePanel2, JPanel hidePanel3, JPanel hidePanel4, JPanel hidePanel5, JPanel hidePanel6, JPanel hidePanel7) {
+    public static void showPanels(JPanel showPanel, JPanel hidePanel1, JPanel hidePanel2, JPanel hidePanel3, JPanel hidePanel4, JPanel hidePanel5, JPanel hidePanel6, JPanel hidePanel7, JPanel hidePanel8) {
         showPanel.setVisible(true);
         hidePanel1.setVisible(false);
         hidePanel2.setVisible(false);
@@ -180,6 +193,7 @@ public class Menu extends JFrame {
         hidePanel5.setVisible(false);
         hidePanel6.setVisible(false);
         hidePanel7.setVisible(false);
+        hidePanel8.setVisible(false);
     }
     
     static void setButton(JButton button, String text) {
@@ -190,16 +204,16 @@ public class Menu extends JFrame {
     }
 
     public static void langueButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-    	showPanels(languePanel, optionsPanel, MainMenuPanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel);
+    	showPanels(languePanel, optionsPanel, MainMenuPanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel, gagnerPanel);
     }                                         
 
     public static void volumeButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
-    	showPanels(volumePanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel);
+    	showPanels(volumePanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel, gagnerPanel);
     }
     
     public static void retourGameOverButtonMouseClicked(java.awt.event.MouseEvent evt) {
     	niveauPanel.rejouer();
-    	showPanels(MainMenuPanel, optionsPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel);
+    	showPanels(MainMenuPanel, optionsPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel, gagnerPanel);
     	//Audio.stopSound("/audio/partiePerdue.wav");
     	rejouer = true;
     }                                         
@@ -208,28 +222,28 @@ public class Menu extends JFrame {
     	
         niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/moustache_profil_static.png")),"/images/moustache_profil_static.png");
         niveauPanel.temps.setCompteurTemps(niveauPanel.temps.getCompteurTempsInitial());
-    	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel);
+    	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel, gagnerPanel);
     }
     
     static void avatar2MouseClicked(java.awt.event.MouseEvent evt) {
     	
     	niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/cregut_static_droit.png")),"/images/cregut_static_droit.png");
     	niveauPanel.temps.setCompteurTemps(niveauPanel.temps.getCompteurTempsInitial());
-    	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel);
+    	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel, gagnerPanel);
     }
     
     static void avatar3MouseClicked(java.awt.event.MouseEvent evt) {
     	niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/modifmario_arefaire.png")),"/images/modifmario_arefaire.png");
     	niveauPanel.temps.setCompteurTemps(niveauPanel.temps.getCompteurTempsInitial());
-    	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel);
+    	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel, gagnerPanel);
     }
     
     public static void retourVolumeButtonMouseClicked(java.awt.event.MouseEvent evt) {                                                
-    	showPanels(optionsPanel, languePanel, MainMenuPanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel);
+    	showPanels(optionsPanel, languePanel, MainMenuPanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel, gagnerPanel);
     }                                               
 
     public static void retourOptionsButtonMouseClicked(java.awt.event.MouseEvent evt) {                                                 
-    	showPanels(MainMenuPanel, optionsPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel);
+    	showPanels(MainMenuPanel, optionsPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel, gagnerPanel);
     }                                                
 
     public static void meilleurScoreMouseClicked(java.awt.event.MouseEvent evt) {                                           
@@ -237,7 +251,7 @@ public class Menu extends JFrame {
     }                                          
 
     public static void retourScoreButtonMouseClicked(java.awt.event.MouseEvent evt) {                                               
-    	showPanels(MainMenuPanel, optionsPanel, languePanel, volumePanel, scorePanel, jouerPanel,niveauPanel, gameOverPanel);
+    	showPanels(MainMenuPanel, optionsPanel, languePanel, volumePanel, scorePanel, jouerPanel,niveauPanel, gameOverPanel, gagnerPanel);
     }                                                                                          
 
     public static void quitterButtonMouseClicked(java.awt.event.MouseEvent evt) {                                           
@@ -245,23 +259,30 @@ public class Menu extends JFrame {
     }                                          
 
     public static void jouerButtonMouseClicked(java.awt.event.MouseEvent evt) {                                         
-    	showPanels(jouerPanel, optionsPanel, languePanel, volumePanel, scorePanel, MainMenuPanel, niveauPanel, gameOverPanel);
+    	showPanels(jouerPanel, optionsPanel, languePanel, volumePanel, scorePanel, MainMenuPanel, niveauPanel, gameOverPanel, gagnerPanel);
     }                                        
 
     public static void optionsButtonMouseClicked(java.awt.event.MouseEvent evt) {                                           
-    	showPanels(optionsPanel, MainMenuPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel);
+    	showPanels(optionsPanel, MainMenuPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel,gagnerPanel);
     }                                                                                
 
     public static void retourAvatarButtonMouseClicked(java.awt.event.MouseEvent evt) {                                                
-    	showPanels(MainMenuPanel, optionsPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel);
+    	showPanels(MainMenuPanel, optionsPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel, gagnerPanel);
     }                                                                                     
 
     public static void scoreButtonMouseClicked(java.awt.event.MouseEvent evt) {                                         
-    	showPanels(scorePanel, optionsPanel, languePanel, volumePanel, MainMenuPanel, jouerPanel, niveauPanel, gameOverPanel);
+    	showPanels(scorePanel, optionsPanel, languePanel, volumePanel, MainMenuPanel, jouerPanel, niveauPanel, gameOverPanel, gagnerPanel);
+    }
+    
+    public static void retourGagnerButtonMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    	niveauPanel.rejouer();
+    	showPanels(MainMenuPanel, optionsPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel, gagnerPanel);
+    	//Audio.stopSound("/audio/partiePerdue.wav");
+    	rejouer = true;
     }
     
     public static void retourLangueButtonMouseClicked(java.awt.event.MouseEvent evt) {                                                
-    	showPanels(optionsPanel, MainMenuPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel);
+    	showPanels(optionsPanel, MainMenuPanel, languePanel, volumePanel, scorePanel, jouerPanel, niveauPanel, gameOverPanel, gagnerPanel);
     }     
 
     public static void englishButtonMouseClicked(java.awt.event.MouseEvent evt) {                                           
@@ -277,7 +298,9 @@ public class Menu extends JFrame {
         englishButton.setText("English");
         meilleurScore.setText("Your highest score is");
         jLabel6.setText("Select your avatar");
-
+        gameOverPanel.getRetourGameOverButton().setText("Play again?");
+        gagnerPanel.getRetourGagnerButton().setText("Play again?");
+        
     }                                                                                    
 
     public static void frenchButtonMouseClicked(java.awt.event.MouseEvent evt) {                                          
@@ -293,6 +316,8 @@ public class Menu extends JFrame {
         englishButton.setText("Anglais");
         meilleurScore.setText("Ton meilleur score est");
         jLabel6.setText("Choisis ton avatar");
+        gameOverPanel.getRetourGameOverButton().setText("Rejouer?");
+        gagnerPanel.getRetourGagnerButton().setText("Rejouer?");
     }                                         
 
     public static void main(String args[]) {
@@ -303,6 +328,7 @@ public class Menu extends JFrame {
                 fenetre.setSize(1580,660);
                 fenetre.setVisible(true);
                 fenetre.setResizable(false);
+                
             }
         });
     }
