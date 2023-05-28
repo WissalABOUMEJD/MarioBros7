@@ -281,33 +281,42 @@ public class Niveau extends JPanel{
 		}
 		// ajout des marhce droite, gauche,saut ect
 		else if (player.marcheDroiteEnCours == true ) {
-			if(compteurmarche%2==0) {
+			if(compteurmarche%3==0) {
+				
+				compteurmarche++;
+				Mario = MarioImg.getImage();
+			}else {
 				Mario = marche_droite.getImage(); //on alterne l'image de mario qui court et mario normal pour fairel'illusion qu'il court
 				compteurmarche++;
-			}else {
-				Mario = MarioImg.getImage();
-				compteurmarche++;
 			}
-			//player.courirdroite();
+			if(compteurmarche%30==0) {
+				player.marcheDroiteEnCours=false;
+			}
 			
+			//player.courirdroite();
 			MarioImg=static_droite;// on remet le amrio static droit une fois qu'il arrete de courir
 	}
 		
 		
 		else if (player.marcheGaucheEnCours == true) {
-			if(compteurmarche%2==0) {
-				Mario = marche_gauche.getImage();
+			if(compteurmarche%5==0) {
+				
+				Mario = MarioImg.getImage();
 				compteurmarche++;
 			}else {
-				Mario = MarioImg.getImage();
+				Mario = marche_gauche.getImage();
 				compteurmarche++;
 			}
 			//player.courirgauche();
 			MarioImg=static_gauche;
+			if(compteurmarche%30==0) {
+				player.marcheGaucheEnCours=false;
+			}
 		}else {
 			Mario = MarioImg.getImage();
 			compteurmarche=0;
 		}
+		
 		
 		
 		

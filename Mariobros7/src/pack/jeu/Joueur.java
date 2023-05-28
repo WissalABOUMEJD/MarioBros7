@@ -101,17 +101,17 @@ public class Joueur {
 		int dureeMax=30;
 		if(this.sautEnCours==false) { // on se déplace que quand saut n'est pas en cours
 			Menu.niveauPanel.setX(-Deplacement.vitesseDeplacement/2);
-			if(compteurMarche < dureeMax) {
-				compteurMarche ++;
-			}else if (compteurMarche == dureeMax) {
+			//if(compteurMarche < dureeMax) {
+				//compteurMarche ++;
+			//}else if (compteurMarche == dureeMax) {
 				
-				compteurMarche ++;
-			}else {
+			//	compteurMarche ++;
+			//}else {
 				
-				compteurMarche=0;
+				//compteurMarche=0;
 				
-				marcheGaucheEnCours=false;
-			}
+				//marcheGaucheEnCours=false;
+			//}
 		}
 		
 		
