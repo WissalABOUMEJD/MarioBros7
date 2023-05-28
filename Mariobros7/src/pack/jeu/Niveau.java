@@ -242,12 +242,20 @@ public class Niveau extends JPanel{
 		super.paintComponent(g);
 		Graphics g2 = (Graphics2D)g;
 		
-		
+		//on détecte les collisions à l'instant t
 		detectionCollision(tabObjets);
+		
 		
 		player.tomber();
 		
 		majFond();
+		
+		//SI mario sur une piece on enleve la piece
+		for(int i=0;i< this.tabPieces.size();i++) {
+			if(player.contactPiece(tabPieces.get(i))==true)
+				this.tabPieces.remove(i);
+		}
+		
 		// Changement de position des personnages
 		if (player.sautEnCours == true) {
 			player.sauter();
@@ -382,6 +390,7 @@ public class Niveau extends JPanel{
 		}
 		
 	}
+	
 
 	public void setX(int i) {
 		dx = i;

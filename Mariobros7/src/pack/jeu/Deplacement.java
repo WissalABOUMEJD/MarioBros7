@@ -25,14 +25,14 @@ public class Deplacement implements KeyListener {
         	}
         	Menu.niveauPanel.player.courirgauche();
         	Menu.niveauPanel.player.marcheDroiteEnCours = false;
-        	Menu.niveauPanel.player.sautEnCours = false;
+        	
         }  
         if (keyCode == KeyEvent.VK_RIGHT) {
         	if (Menu.niveauPanel.player.marcheDroiteEnCours == false) {
         		Menu.niveauPanel.player.marcheDroiteEnCours = true;
         	}
         	Menu.niveauPanel.player.marcheGaucheEnCours = false;
-        	Menu.niveauPanel.player.sautEnCours = false;
+        	
         	Menu.niveauPanel.player.courirdroite();
         	//Menu.niveauPanel.setX(vitesseDeplacement);
         	right = true;

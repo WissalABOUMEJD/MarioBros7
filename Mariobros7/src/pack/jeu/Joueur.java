@@ -1,4 +1,6 @@
 package pack.jeu;
+import java.awt.Rectangle;
+
 import menu.Menu;
 
 public class Joueur {
@@ -10,13 +12,14 @@ public class Joueur {
 	private final int pause = 3;
 	private boolean marche;
 	private boolean droite;
+	//permet de savoir si personnage est en collision avec u objet ou une piece ces valeurs seront changer par lamethode detectioncollison
 	public boolean collisionHaut = false;
 	public boolean collisionBas = false;
 	public boolean collisionDroite = false;
 	public boolean collisionGauche = false;
-	public boolean sautEnCours;
 	
 	
+	private int indexPieceContact;// correspond à l'indice de la piece qu'il faut retirer
 	
 	public final int hauteurMario = 48;
 	public final int largeurMario = 32;
@@ -25,6 +28,7 @@ public class Joueur {
 	public int compteurMarche;
 	public boolean marcheGaucheEnCours;
 	public boolean marcheDroiteEnCours;
+	public boolean sautEnCours; 
 
 	
 	public Joueur(int x, int y) {
@@ -49,7 +53,7 @@ public class Joueur {
 			if (collisionHaut) {
 				compteurSaut = dureeSaut;
 			} else {
-				setY(-8);
+				setY(-15);
 				compteurSaut++;
 			}
 			
@@ -66,7 +70,7 @@ public class Joueur {
 				compteurSaut = 0;
 				sautEnCours = false;
 			} else {
-				setY(8);
+				setY(15);
 			}
 		}
 	}
@@ -74,43 +78,62 @@ public class Joueur {
 	public void courirdroite() {
 		//mise en place d'un compteur/retardataire pour l'affichage bonhomme qui court
 		int dureeMax=30;
-		Menu.niveauPanel.setX(Deplacement.vitesseDeplacement/2);
-		if(compteurMarche < dureeMax) {
-			compteurMarche ++;
-		}else if (compteurMarche == dureeMax) {
-			
-			compteurMarche ++;
-		}else {
-			
-			compteurMarche=0;
-			marcheDroiteEnCours=false;
-			
+		if(this.sautEnCours==false) {
+			Menu.niveauPanel.setX(Deplacement.vitesseDeplacement/2);
+			if(compteurMarche < dureeMax) {
+				compteurMarche ++;
+			}else if (compteurMarche == dureeMax) {
+				
+				compteurMarche ++;
+			}else {
+				
+				compteurMarche=0;
+				marcheDroiteEnCours=false;
+				
+			}
 		}
+		
 		
 	}
 	
 	public void courirgauche() {
 		//mise en place d'un compteur/retardataire pour l'affichage bonhomme qui court
 		int dureeMax=30;
-		Menu.niveauPanel.setX(-Deplacement.vitesseDeplacement/2);
-		if(compteurMarche < dureeMax) {
-			compteurMarche ++;
-		}else if (compteurMarche == dureeMax) {
-			
-			compteurMarche ++;
-		}else {
-			
-			compteurMarche=0;
-			
-			marcheGaucheEnCours=false;
+		if(this.sautEnCours==false) { // on se déplace que quand saut n'est pas en cours
+			Menu.niveauPanel.setX(-Deplacement.vitesseDeplacement/2);
+			if(compteurMarche < dureeMax) {
+				compteurMarche ++;
+			}else if (compteurMarche == dureeMax) {
+				
+				compteurMarche ++;
+			}else {
+				
+				compteurMarche=0;
+				
+				marcheGaucheEnCours=false;
+			}
 		}
 		
+		
+	}
+	/**Est ce que le personnage est en contact avec la piece
+	 * 
+	 * @param piece
+	 * @return vrai si en contact faux sinon
+	 */
+	public boolean contactPiece(Piece piece) {
+		
+		Rectangle rectangleMario = new Rectangle(this.getX()+Menu.niveauPanel.xFondCumule ,this.getY(),this.largeurMario + 2,this.hauteurMario);
+		
+		Rectangle rectangleObjet;
+			
+		rectangleObjet = new Rectangle(piece.getX(),piece.getY(),piece.largeurObjet+2,piece.hauteurObjet);
+			
+		return rectangleMario.intersects(rectangleObjet);
 	}
 	
 	
 	
-	
-
 	
 	public void setCollisionDroite(boolean collisionDroite) {
 		this.collisionDroite = collisionDroite;
