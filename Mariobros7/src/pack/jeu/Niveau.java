@@ -13,6 +13,7 @@ import audioMario.Audio;
 import menu.Menu;
 
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class Niveau extends JPanel{
@@ -92,6 +93,7 @@ public class Niveau extends JPanel{
 	public ScoreJeu score;
 	public Deplacement deplacement = new Deplacement();
 	public boolean rejouer; 
+	public boolean isPaused;
 	
 	//image pour changement de joueur
 	// elle seront définit dans la méthode setMario
@@ -107,6 +109,7 @@ public class Niveau extends JPanel{
 	public Niveau() {
 		super();
 		System.out.println("test");
+		
 
 		xFond1 = 0;
 		xFond2 = longueurImage; // Les deux images sont en longueurImagex824 pixels.
@@ -129,9 +132,9 @@ public class Niveau extends JPanel{
 		LavaImg = new ImageIcon(getClass().getResource("/images/Lava-Transparent4.png"));
 		Lava = LavaImg.getImage();
 		
-		lava = new Lava(1588, 548);
+		lava = new Lava(1568, 548);
 		ground = new Ground(0, 548);
-		ground2 = new Ground(1816, 548);
+		ground2 = new Ground(1796, 548);
 		GroundImg = new ImageIcon(getClass().getResource("/images/ground.png"));
 		Ground = GroundImg.getImage();
 		
@@ -139,6 +142,7 @@ public class Niveau extends JPanel{
 		player = new Joueur(0,452);
 		temps = new Temps();
 		score = new ScoreJeu();
+		System.out.println(this.score.getNbPieces());
 		
 		//instanciantion des objets
 		brique1 = new Brique(1200, 404);
@@ -245,6 +249,7 @@ public class Niveau extends JPanel{
 	*@param g A ECRIRE
 	*/
 	public void paintComponent(Graphics g) {
+		
 		super.paintComponent(g);
 		Graphics g2 = (Graphics2D)g;
 		
@@ -258,8 +263,10 @@ public class Niveau extends JPanel{
 		
 		//SI mario sur une piece on enleve la piece
 		for(int i=0;i< this.tabPieces.size();i++) {
-			if(player.contactPiece(tabPieces.get(i))==true)
+			if(player.contactPiece(tabPieces.get(i))==true) {
 				this.tabPieces.remove(i);
+			this.score.setNbrePieces(this.score.getNbPieces() + 1);
+		}
 		}
 		
 		// Changement de position des personnages
@@ -361,9 +368,7 @@ public class Niveau extends JPanel{
 			
 			
 			if (touché) {
-				System.out.println(o);
-				System.out.println(o.getY() + o.hauteurObjet*1.5);
-				System.out.println(player.getY() + player.hauteurMario);
+				
 
 
 				if (o instanceof Lava) {
@@ -489,6 +494,12 @@ public class Niveau extends JPanel{
 		xFondCumule = 0;
 	    temps.setCompteurTemps(temps.getCompteurTemps());
 	    player.setX(0);
-
+	    this.tabPieces.add(this.piece1);
+		this.tabPieces.add(this.piece2);
+		this.tabPieces.add(this.piece3);
+		this.tabPieces.add(this.piece4);
+		this.tabPieces.add(this.piece5);
+		this.tabPieces.add(this.piece6);
 	}
+	
 }
