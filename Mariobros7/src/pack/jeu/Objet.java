@@ -26,6 +26,11 @@ public class Objet {
 	public int getHauteurObjet() {
 		return hauteurObjet;
 	}
+	
+	public int getLargeurObjet() {
+		return largeurObjet;
+	}
+
 
 	public void actionObjet() {
 	}
@@ -35,7 +40,7 @@ public class Objet {
 	}
 
 	public void setY(int y) {
-		this.y = y;
+		this.y = this.y + y;
 	}
 
 	public int getX() {
@@ -43,7 +48,7 @@ public class Objet {
 	}
 
 	public void setX(int x) {
-		this.x = x;
+		this.x = this.x + x;
 	}
 
 	public Image getImageObjet() {

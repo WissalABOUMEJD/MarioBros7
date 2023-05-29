@@ -6,25 +6,26 @@ import javax.swing.ImageIcon;
 
 public class CubeMystere extends Objet{
 	
-	private static final Collision Bas = null;
 	private ImageIcon iconCube;
 	private static Image imageCube;
 	
 	private static boolean afficher;
+	private Cubes particularité;
 	
 	
-	public CubeMystere(int x, int y) {
+	public CubeMystere(int x, int y,Cubes particularité) {
 		super(32, 32, x, y);
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/CubeMystère.png"));
 		super.imageObjet = this.icoObjet.getImage();
-		afficher = true;
+		this.particularité = particularité;
 	}
 	
 	@Override
 	public void actionObjet(Collision collision) {
-		if (collision == Bas) {
-			changementImage();
-			liberationObjet();
+		if (collision == Collision.Haut) {
+			if (particularité == Cubes.foncé) {
+				changementImage();
+			}
 		}	
 	}
 
@@ -58,8 +59,8 @@ public class CubeMystere extends Objet{
 	}
 
 	private void changementImage() {
-		iconCube = new ImageIcon(getClass().getResource("/images/CubeMystèreFoncé.png"));
-		imageCube = iconCube.getImage();
+		super.icoObjet = new ImageIcon(getClass().getResource("/images/CubeMystèreFoncé.png"));
+		super.imageObjet = icoObjet.getImage();
 	}
 	
 	

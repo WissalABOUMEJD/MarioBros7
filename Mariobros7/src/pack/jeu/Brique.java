@@ -6,30 +6,33 @@ import javax.swing.ImageIcon;
 
 public class Brique extends Objet{
 	
-	private static final Collision Bas = null;
+
+	private boolean cassable;
+	private boolean casse;
 	
-	private static boolean afficher;
-	
-	public Brique(int x, int y) {
+	public Brique(int x, int y, boolean cassable) {
 		super(32, 32, x, y);
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/bloc.png"));
 		super.imageObjet = this.icoObjet.getImage();
-		afficher = true;
+		this.cassable = cassable;
+		casse = false;
 	}
 	
 	@Override
 	public void actionObjet(Collision collision) {
-		if (collision == Bas) {
-			afficher = false;
+		if (collision == Collision.Haut && cassable) {
+			this.setCasse(true);
 		}	
+	}
+
+	public boolean isCasse() {
+		return casse;
+	}
+
+	public void setCasse(boolean casse) {
+		this.casse = casse;
 	}
 	
 
-	public static boolean isAfficher() {
-		return afficher;
-	}
 
-	public static void setAfficher(boolean afficher) {
-		Brique.afficher = afficher;
-	}
 }

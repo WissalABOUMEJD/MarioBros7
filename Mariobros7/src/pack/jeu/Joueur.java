@@ -29,6 +29,8 @@ public class Joueur {
 	public boolean marcheGaucheEnCours;
 	public boolean marcheDroiteEnCours;
 	public boolean sautEnCours; 
+	public boolean chuteEnCours; 
+
 	public boolean marioPetit = true;
 
 
@@ -45,6 +47,7 @@ public class Joueur {
 	public void tomber() {
 		if (!collisionBas && !sautEnCours) {
 			setY(16);
+			chuteEnCours = true;
 		}
 	}
 	
@@ -188,7 +191,7 @@ public class Joueur {
 	public void toucher() {
 	if (marioPetit) {
 		Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
-	        Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel);
+                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
 	} else {
 		marioPetit = true;
 	}

@@ -39,7 +39,7 @@ public class Deplacement implements KeyListener {
         	//Menu.niveauPanel.setX(vitesseDeplacement);
         	right = true;
         }
-        if (keyCode == KeyEvent.VK_UP && !Menu.niveauPanel.isPaused) {
+        if (keyCode == KeyEvent.VK_UP && !Menu.niveauPanel.isPaused && ! Menu.niveauPanel.player.chuteEnCours) {
         	if (Menu.niveauPanel.player.sautEnCours == false) {
         		Menu.niveauPanel.player.sautEnCours = true;
         	}
