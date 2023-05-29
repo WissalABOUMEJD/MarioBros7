@@ -154,25 +154,25 @@ public class Niveau extends JPanel{
 		System.out.println(this.score.getNbPieces());
 		
 		//instanciantion des objets
-		brique1 = new Brique(1200, 404,true);
-		brique2 = new Brique(1230, 404,false);
+		brique1 = new Brique(1200, 404,Briques.cassable);
+		brique2 = new Brique(1230, 404,Briques.pièce);
 
-		cube1 = new CubeMystere(1260, 404,Cubes.foncé);
-		cube3 = new CubeMystere(1280, 250,Cubes.foncé);
-		brique3 = new Brique(1290, 404,false);
-		brique4 = new Brique(1350, 404,false);
-		cube2 = new CubeMystere(1320, 404,Cubes.foncé);
+		cube1 = new CubeMystere(1260, 404,Cubes.vide);
+		cube3 = new CubeMystere(1280, 250,Cubes.champignon);
+		brique3 = new Brique(1290, 404,Briques.cassable);
+		brique4 = new Brique(1350, 404,Briques.pièce);
+		cube2 = new CubeMystere(1320, 404,Cubes.vide);
 		tuyau1 = new Tuyau(1500, 484);
 		tuyau2 = new Tuyau(1800, 484);
 		tuyau3 = new Tuyau(2100, 484);
-		brique5 = new Brique(1950, 404,false);
-		brique6 = new Brique(2600, 404,false);
+		brique5 = new Brique(1950, 404,Briques.pièces);
+		brique6 = new Brique(2600, 404,Briques.pièces);
 		cube4 = new CubeMystere(2630, 404,Cubes.champignon);
-		brique7 = new Brique(2660, 404,false);
-		brique8 = new Brique(3300, 404,true);
-		brique9 = new Brique(3404, 404,true);
+		brique7 = new Brique(2660, 404,Briques.pièce);
+		brique8 = new Brique(3300, 404,Briques.cassable);
+		brique9 = new Brique(3404, 404,Briques.cassable);
 		
-		cube1 = new CubeMystere(1260, 404,Cubes.foncé);
+		cube1 = new CubeMystere(1260, 404,Cubes.pièces);
 		//Instancier objet piece
 		piece1 = new Piece(1230,370);
 		piece2 = new Piece(1200,370);

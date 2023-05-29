@@ -23,7 +23,7 @@ public class CubeMystere extends Objet{
 	@Override
 	public void actionObjet(Collision collision) {
 		if (collision == Collision.Haut) {
-			if (particularité == Cubes.foncé) {
+			if (particularité == Cubes.vide) {
 				changementImage();
 			}
 		}	
