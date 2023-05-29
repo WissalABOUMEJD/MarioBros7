@@ -19,7 +19,7 @@ public class Joueur {
 	public boolean collisionGauche = false;
 	
 	
-	private int indexPieceContact;// correspond à l'indice de la piece qu'il faut retirer
+	
 	
 	public final int hauteurMario = 48;
 	public final int largeurMario = 32;
@@ -76,8 +76,10 @@ public class Joueur {
 				sautEnCours = false;
 			} else {
 				setY(16);
+				sautEnCours = false;
 			}
 		}
+		
 	}
 	
 	public void courirdroite() {
@@ -85,17 +87,11 @@ public class Joueur {
 		int dureeMax=30;
 		if(this.sautEnCours==false) {
 			Menu.niveauPanel.setX(Deplacement.vitesseDeplacement/2);
-			if(compteurMarche < dureeMax) {
-				compteurMarche ++;
-			}else if (compteurMarche == dureeMax) {
-				
-				compteurMarche ++;
-			}else {
-				
+		
 				compteurMarche=0;
-				marcheDroiteEnCours=false;
 				
-			}
+				
+			
 		}
 		
 		
@@ -106,17 +102,10 @@ public class Joueur {
 		int dureeMax=30;
 		if(this.sautEnCours==false) { // on se déplace que quand saut n'est pas en cours
 			Menu.niveauPanel.setX(-Deplacement.vitesseDeplacement/2);
-			if(compteurMarche < dureeMax) {
-				compteurMarche ++;
-			}else if (compteurMarche == dureeMax) {
+			
 				
-				compteurMarche ++;
-			}else {
-				
-				compteurMarche=0;
-				
-				marcheGaucheEnCours=false;
-			}
+			
+			
 		}
 		
 		

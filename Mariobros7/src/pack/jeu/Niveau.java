@@ -125,10 +125,10 @@ public class Niveau extends JPanel{
 		xFondCumule = 0;
 		
 		
-		fondDuJeuImg1 = new ImageIcon(getClass().getResource("/images/FondProvisoire1.jpg"));
+		fondDuJeuImg1 = new ImageIcon(getClass().getResource("/images/fond_test.png"));
 		fondDuJeu1 =fondDuJeuImg1.getImage();
 		
-		fondDuJeuImg2 = new ImageIcon(getClass().getResource("/images/FondProvisoire2.png"));
+		fondDuJeuImg2 = new ImageIcon(getClass().getResource("/images/fond_test.png"));
 		fondDuJeu2 =fondDuJeuImg2.getImage();
 		
 		
@@ -307,7 +307,9 @@ public class Niveau extends JPanel{
 				compteurmarche++;
 			}
 			//player.courirdroite();
-			
+			if(compteurmarche%30==0) {
+				player.marcheDroiteEnCours=false;
+			}
 			MarioImg=static_droite;// on remet le amrio static droit une fois qu'il arrete de courir
 	}
 		
@@ -321,6 +323,9 @@ public class Niveau extends JPanel{
 				compteurmarche++;
 			}
 			//player.courirgauche();
+			if(compteurmarche%30==0) {
+				player.marcheDroiteEnCours=false;
+			}
 			MarioImg=static_gauche;
 		}else {
 			Mario = MarioImg.getImage();
