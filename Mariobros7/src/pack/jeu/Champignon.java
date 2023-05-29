@@ -7,24 +7,34 @@ import javax.swing.ImageIcon;
 public class Champignon extends Objet{
 	
 	
-	private static boolean afficher;
+	private boolean directionGauche;
 	
-	public Champignon(int x, int y) {
+	public Champignon(int x, int y,boolean directionGauche) {
 		super(32, 32, x, y);
-		super.icoObjet = new ImageIcon(getClass().getResource("/images/tuyau.png"));  // A remplacer
+		super.icoObjet = new ImageIcon(getClass().getResource("/images/champignon2.png"));  // A remplacer
 		super.imageObjet = this.icoObjet.getImage();
-		afficher = true;
+		this.directionGauche = directionGauche;
+	}
+	
+	public void changerDirection () {
+		directionGauche = !directionGauche;
 	}
 	
 	@Override
 	public void actionObjet(Collision collision) {
-
 	}
 
 
-	public static boolean isAfficher() {
-		return afficher;
+
+	public void deplacementChampignon () {
+		if (directionGauche) {
+			super.setX(-1);
+		} else {
+			super.setX(1);
+		}
 	}
+	
+	
 
 
 }
