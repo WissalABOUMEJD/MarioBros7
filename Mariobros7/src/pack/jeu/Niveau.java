@@ -33,6 +33,9 @@ public class Niveau extends JPanel{
 	private Image Lava;
 	private ImageIcon LavaImg;
 	
+	private Image ennemi;
+	private ImageIcon ennemiImg;	
+	
 	public Joueur player;
 		
 	public static int xFond1;
@@ -85,9 +88,13 @@ public class Niveau extends JPanel{
 	public Piece piece5;
 	public Piece piece6;
 	
+	public Ennemi ennemi1;
+
+	
 	private ArrayList<Objet> tabObjets; // tableau qui enregistre tous les objets du jeu
 	private ArrayList<Piece> tabPieces; // tableau qui enregistre tous les pices du niveau
-	
+	private ArrayList<Ennemi> tabEnnemi; // tableau qui enregistre tous les pices du niveau
+
 	public Chateau chateau;
 	public Temps temps;
 	public ScoreJeu score;
@@ -138,6 +145,9 @@ public class Niveau extends JPanel{
 		GroundImg = new ImageIcon(getClass().getResource("/images/ground.png"));
 		Ground = GroundImg.getImage();
 		
+		ennemiImg = new ImageIcon(getClass().getResource("/images/Goomba.png"));
+		ennemi = ennemiImg.getImage();
+		
 		
 		player = new Joueur(0,452);
 		temps = new Temps();
@@ -173,6 +183,8 @@ public class Niveau extends JPanel{
 		piece5 = new Piece(1950,370);
 		piece6 = new Piece(2660,370);
 		chateau = new Chateau(3800,404);
+		
+		ennemi1 = new Ennemi(500,452,false);
 
 
 		//Image brique = new ImageIcon(getClass().getResource("/images/Brique.png")).getImage();
@@ -214,6 +226,9 @@ public class Niveau extends JPanel{
 		
 		this.tabObjets.add(this.ground);
 		this.tabObjets.add(this.ground2);
+		
+		tabEnnemi = new ArrayList<Ennemi>();
+		this.tabEnnemi.add(this.ennemi1);		
 		
 		this.setFocusable(true);
 		this.requestFocusInWindow();
@@ -321,6 +336,11 @@ public class Niveau extends JPanel{
 			Audio.playSound("/audio/partiePerdue.wav");
 		}
 		
+		detectionCollisionEnnemiObstacle(tabObjets,ennemi1);
+		ennemi1.deplacementEnnemi();
+		
+		detectionCollisionEnnemiMario(tabEnnemi);
+		
 		player.setCollisionBas(false);
 		player.setCollisionDroite(false);
 		player.setCollisionGauche(false);
@@ -343,6 +363,10 @@ public class Niveau extends JPanel{
 		//Image des pices
 		for(int i = 0; i < this.tabPieces.size(); i++){
  	 		g2.drawImage(this.tabPieces.get(i).getImageObjet(), deplacement(this.tabPieces.get(i)), this.tabPieces.get(i).getY(), null);
+ 	 	}
+		//Image des ennemis
+		for(int i = 0; i < this.tabEnnemi.size(); i++){
+ 	 		g2.drawImage(this.tabEnnemi.get(i).getImageObjet(), deplacement(this.tabEnnemi.get(i)), this.tabEnnemi.get(i).getY(), null);
  	 	}	
 		Font font = new Font("Press Start 2P", Font.PLAIN, 20);
 		g2.setFont(font);
@@ -370,44 +394,83 @@ public class Niveau extends JPanel{
 				rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
 			}
 			boolean touché = rectangleMario.intersects(rectangleObjet);
-	
+
+			
+			
 			if (touché) {
+
+
 				if (o instanceof Lava) {
 					Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
-			                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
+			                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel);
 				}
 				if (o.getX() == player.getX() + xFondCumule + player.largeurMario && player.getY() + player.hauteurMario != o.getY()) {
 					collision = Collision.Gauche;
 					player.setCollisionGauche(true);
-					System.out.println("gauche");
 					o.actionObjet(collision);
 
 				} else if (o.getX() + o.largeurObjet == player.getX() + xFondCumule && player.getY() + player.hauteurMario != o.getY()) {
 					collision = Collision.Droite;
 					player.setCollisionDroite(true);
-					System.out.println("droite");
 					o.actionObjet(collision);
 
 				}  else if (player.getY() + player.hauteurMario == o.getY() ){
 					collision = Collision.Bas;
 					player.setCollisionBas(true);
-					System.out.println("collisionbaaaaaas");
+					player.chuteEnCours = false;
 					o.actionObjet(collision);
 					
 				} else { //peut être à modifier en changeant le signe
 					collision = Collision.Haut;      
 					player.setCollisionHaut(true);
 					o.actionObjet(collision);
-					System.out.println("collisionhauuuuuuuuut");
-					
-				
 			}
 		}
 		}
-		
 	}
 	
 
+	public void detectionCollisionEnnemiObstacle (ArrayList<Objet> tabObjets,Ennemi ennemi) {
+		boolean tomber = true;
+		Rectangle rectangleEnnemi = new Rectangle(ennemi.getX()  ,ennemi.getY(),ennemi.getLargeurObjet() + 1,ennemi.getHauteurObjet()+1);
+		for (Objet o : tabObjets) {
+			Rectangle rectangleObjet;
+
+			rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
+			boolean touché = rectangleEnnemi.intersects(rectangleObjet);
+
+			if (touché && ennemi.getY() + ennemi.getHauteurObjet() == o.getY()) {  //Collision avec le bas l'ennemi ne tombe donc pas
+				tomber = false;
+			} else if (touché) {   //Collision avec un obstacle
+				System.out.println(o);
+				System.out.println(ennemi.getY() + ennemi.getHauteurObjet() );
+				System.out.println(o.getY());
+				ennemi.changerDirection();
+			}
+			
+			}
+		if (tomber) {
+			ennemi.setY(16);
+		}
+	}
+	
+	
+
+	public void detectionCollisionEnnemiMario (ArrayList<Ennemi> tabEnnemi) {
+		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
+		for (Ennemi o : tabEnnemi) {
+			Rectangle rectangleEnnemi;
+			rectangleEnnemi = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);	
+			boolean touché = rectangleMario.intersects(rectangleEnnemi);	
+			if (touché) {
+				if (player.getY() + player.hauteurMario == o.getY() ) {   //Contact de mario sur le haut de l'ennemi
+					tabEnnemi.remove(o);  //Ajouter le bruit pour tuer l'ennemi
+				} else {
+					player.toucher();
+				} 
+			}
+		}	
+	}
 	public void setX(int i) {
 		dx = i;
 	}
