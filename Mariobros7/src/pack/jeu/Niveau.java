@@ -510,9 +510,9 @@ public class Niveau extends JPanel{
 			this.marche_droite = new ImageIcon(getClass().getResource("/images/moustache_profil_marche.png"));
 			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
 			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
-			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));;
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
 			this.static_droite =avatar1;
-			this.static_gauche=avatar1;//ACHANGER!!!!
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
 		}
 		else if(url =="/images/moustache_profil_static.png") {
 			//on charge les images pour le perso vert
