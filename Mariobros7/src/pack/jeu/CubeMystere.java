@@ -11,20 +11,24 @@ public class CubeMystere extends Objet{
 	
 	private static boolean afficher;
 	private Cubes particularité;
+	private boolean libereChampignon;
 	
 	
 	public CubeMystere(int x, int y,Cubes particularité) {
 		super(32, 32, x, y);
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/CubeMystère.png"));
 		super.imageObjet = this.icoObjet.getImage();
-		this.particularité = particularité;
+		this.setParticularité(particularité);
+		setLibereChampignon(false);
 	}
 	
 	@Override
 	public void actionObjet(Collision collision) {
 		if (collision == Collision.Haut) {
-			if (particularité == Cubes.vide) {
+			if (getParticularité() == Cubes.vide) {
 				changementImage();
+			} else if (getParticularité() == Cubes.champignon) {
+				setLibereChampignon(true);
 			}
 		}	
 	}
@@ -53,14 +57,26 @@ public class CubeMystere extends Objet{
 		CubeMystere.afficher = afficher;
 	}
 
-	private void liberationObjet() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	private void changementImage() {
+	public void changementImage() {
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/CubeMystèreFoncé.png"));
 		super.imageObjet = icoObjet.getImage();
+	}
+
+	public Cubes getParticularité() {
+		return particularité;
+	}
+
+	public void setParticularité(Cubes particularité) {
+		this.particularité = particularité;
+	}
+
+	public boolean isLibereChampignon() {
+		return libereChampignon;
+	}
+
+	public void setLibereChampignon(boolean libereChampignon) {
+		this.libereChampignon = libereChampignon;
 	}
 	
 	
