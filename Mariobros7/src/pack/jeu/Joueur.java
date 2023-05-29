@@ -29,6 +29,8 @@ public class Joueur {
 	public boolean marcheGaucheEnCours;
 	public boolean marcheDroiteEnCours;
 	public boolean sautEnCours; 
+	public boolean marioPetit = true;
+
 
 	
 	public Joueur(int x, int y) {
@@ -181,5 +183,15 @@ public class Joueur {
 	
 	public int getY() {
 		return yJoueur;
+	}
+	
+	public void toucher() {
+	if (marioPetit) {
+		Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
+	        Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel);
+	} else {
+		marioPetit = true;
+	}
+		
 	}
 }
