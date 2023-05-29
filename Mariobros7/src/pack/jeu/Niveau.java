@@ -15,6 +15,7 @@ import menu.Menu;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 public class Niveau extends JPanel{
 
@@ -295,7 +296,10 @@ public class Niveau extends JPanel{
 	                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gameOverPanel);
 		}
 		// Changement de position des personnages
+
+
 		if (player.sautEnCours == true && !player.chuteEnCours) {
+
 			player.sauter();
 			Audio.playSound("/audio/saut.wav");
 			if(MarioImg==static_gauche) {
@@ -497,6 +501,7 @@ public class Niveau extends JPanel{
 	}
 
 	public void detectionCollisionEnnemiMario (ArrayList<Ennemi> tabEnnemi) {
+		try {
 		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 		for (Ennemi o : tabEnnemi) {
 			Rectangle rectangleEnnemi;
@@ -510,10 +515,15 @@ public class Niveau extends JPanel{
 					retrecirImage();
 				} 
 			}
-		}	
+		} 
+		}catch (ConcurrentModificationException e)	{
+			
+		}
 	}
 	
+	
 	public void detectionCollisionBonusMario (ArrayList<Champignon> tabChampignon) {
+		try {
 		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 		for (Champignon o : tabChampignon) {
 			Rectangle rectangleChampignon;
@@ -524,7 +534,10 @@ public class Niveau extends JPanel{
 				tabChampignon.remove(o);
 				grandirImage();
 			}
-		}	
+			}
+		} catch (ConcurrentModificationException e) {
+			
+		}
 	}
 	
 	
@@ -552,12 +565,12 @@ public class Niveau extends JPanel{
 		this.Mario = NewImg.getImage();
 		if (url =="/images/moustache_profil_static.png") {
 			// on charge les images pour le gars à la moustache
-			this.marche_droite = new ImageIcon(getClass().getResource("/images/moustache_profil_marche.png"));
-			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
-			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
-			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
-			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));;
-			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche.png"));
 			typeMario = Avatar.Moustache;
 		}
 		else if(url =="/images/moustache_profil_static.png") {
@@ -572,12 +585,12 @@ public class Niveau extends JPanel{
 
 		}else {
 			
-			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite.png"));
-			this.marche_gauche =new ImageIcon(getClass().getResource("/images/marche_gauche.png"));
-			this.saut_droite =new ImageIcon(getClass().getResource("/images/saut_droite.png"));
-			this.saut_gauche=new ImageIcon(getClass().getResource("/images/saut_gauche.png"));
-			this.static_droite =new ImageIcon(getClass().getResource("/images/static_droit.png"));
-			this.static_gauche=new ImageIcon(getClass().getResource("/images/static_gauche.png"));
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche.png"));
 			typeMario = Avatar.Mario;
 
 		}

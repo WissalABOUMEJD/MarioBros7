@@ -54,6 +54,7 @@ public class Joueur {
 	
 	public void sauter() {
 		//phase Montante du saut
+		System.out.println(compteurSaut);
 		if (compteurSaut < dureeSaut) {
 			if (collisionHaut) {
 				compteurSaut = dureeSaut;
@@ -76,6 +77,7 @@ public class Joueur {
 				sautEnCours = false;
 			} else {
 				setY(16);
+				compteurSaut = 0;
 				sautEnCours = false;
 			}
 		}
