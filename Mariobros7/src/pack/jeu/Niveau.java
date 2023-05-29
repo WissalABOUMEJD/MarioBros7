@@ -90,10 +90,13 @@ public class Niveau extends JPanel{
 	
 	public Ennemi ennemi1;
 
+	public Champignon champignon;
 	
 	private ArrayList<Objet> tabObjets; // tableau qui enregistre tous les objets du jeu
 	private ArrayList<Piece> tabPieces; // tableau qui enregistre tous les pices du niveau
 	private ArrayList<Ennemi> tabEnnemi; // tableau qui enregistre tous les pices du niveau
+	private ArrayList<Champignon> tabChampignon; // tableau qui enregistre tous les pices du niveau
+
 
 	public Chateau chateau;
 	public Temps temps;
@@ -158,7 +161,7 @@ public class Niveau extends JPanel{
 		brique2 = new Brique(1230, 404,Briques.pièce);
 
 		cube1 = new CubeMystere(1260, 404,Cubes.vide);
-		cube3 = new CubeMystere(1280, 250,Cubes.champignon);
+		cube3 = new CubeMystere(1280, 260,Cubes.champignon);
 		brique3 = new Brique(1290, 404,Briques.cassable);
 		brique4 = new Brique(1350, 404,Briques.pièce);
 		cube2 = new CubeMystere(1320, 404,Cubes.vide);
@@ -227,6 +230,8 @@ public class Niveau extends JPanel{
 		tabEnnemi = new ArrayList<Ennemi>();
 		this.tabEnnemi.add(this.ennemi1);		
 		
+		tabChampignon = new ArrayList<Champignon>();
+
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		this.addKeyListener(deplacement);
@@ -267,7 +272,8 @@ public class Niveau extends JPanel{
 		
 		//on détecte les collisions à l'instant t
 		detectionCollision(tabObjets);
-		
+		detectionCollisionEnnemiMario(tabEnnemi);
+		detectionCollisionBonusMario(tabChampignon);
 		
 		player.tomber();
 		
@@ -338,10 +344,9 @@ public class Niveau extends JPanel{
 			Audio.playSound("/audio/partiePerdue.wav");
 		}
 		
-		detectionCollisionEnnemiObstacle(tabObjets,ennemi1);
-		ennemi1.deplacementEnnemi();
+
 		
-		detectionCollisionEnnemiMario(tabEnnemi);
+		
 		
 		player.setCollisionBas(false);
 		player.setCollisionDroite(false);
@@ -366,7 +371,13 @@ public class Niveau extends JPanel{
 				if (brick.isCasse()) {
 					tabObjets.remove(i);
 				}
-			} 
+			} if (tabObjets.get(i) instanceof CubeMystere) {
+				CubeMystere cube = (CubeMystere) tabObjets.get(i);
+				if (cube.isLibereChampignon()) {
+					libérationChampignon(cube);
+					cube.setLibereChampignon(false);
+				}
+			}
  	 		g2.drawImage(this.tabObjets.get(i).getImageObjet(), deplacement(this.tabObjets.get(i)), this.tabObjets.get(i).getY(), null);
  	 	}	 	
 		
@@ -376,8 +387,16 @@ public class Niveau extends JPanel{
  	 	}
 		//Image des ennemis
 		for(int i = 0; i < this.tabEnnemi.size(); i++){
+			detectionCollisionEnnemiObstacle(tabObjets,tabEnnemi.get(i));
+			tabEnnemi.get(i).deplacementEnnemi();
  	 		g2.drawImage(this.tabEnnemi.get(i).getImageObjet(), deplacement(this.tabEnnemi.get(i)), this.tabEnnemi.get(i).getY(), null);
  	 	}	
+		//Image des Champignons
+		for(int i = 0; i < this.tabChampignon.size(); i++){
+			detectionCollisionChampignonObstacle(tabObjets,tabChampignon.get(i));
+			tabChampignon.get(i).deplacementChampignon();
+		 	g2.drawImage(this.tabChampignon.get(i).getImageObjet(), deplacement(this.tabChampignon.get(i)), this.tabChampignon.get(i).getY(), null);
+		}	
 		Font font = new Font("Press Start 2P", Font.PLAIN, 20);
 		g2.setFont(font);
 		g2.drawString(this.temps.getTempsRestant(), 5, 25);
@@ -463,6 +482,26 @@ public class Niveau extends JPanel{
 	}
 	
 	
+	public void detectionCollisionChampignonObstacle (ArrayList<Objet> tabObjets,Champignon champignon) {
+		boolean tomber = true;
+		Rectangle rectangleEnnemi = new Rectangle(champignon.getX()  ,champignon.getY(),champignon.getLargeurObjet() + 1,champignon.getHauteurObjet()+1);
+		for (Objet o : tabObjets) {
+			Rectangle rectangleObjet;
+
+			rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
+			boolean touché = rectangleEnnemi.intersects(rectangleObjet);
+
+			if (touché && champignon.getY() + champignon.getHauteurObjet() == o.getY()) {  //Collision avec le bas l'ennemi ne tombe donc pas
+				tomber = false;
+			} else if (touché) {   //Collision avec un obstacle
+				champignon.changerDirection();
+			}
+			
+			}
+		if (tomber) {
+			champignon.setY(16);
+		}
+	}
 
 	public void detectionCollisionEnnemiMario (ArrayList<Ennemi> tabEnnemi) {
 		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
@@ -479,6 +518,21 @@ public class Niveau extends JPanel{
 			}
 		}	
 	}
+	
+	public void detectionCollisionBonusMario (ArrayList<Champignon> tabChampignon) {
+		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
+		for (Champignon o : tabChampignon) {
+			Rectangle rectangleChampignon;
+			rectangleChampignon = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);	
+			boolean touché = rectangleMario.intersects(rectangleChampignon);	
+			if (touché) {
+				player.grandir();
+				tabChampignon.remove(o);
+			}
+		}	
+	}
+	
+	
 	public void setX(int i) {
 		dx = i;
 	}
@@ -544,6 +598,16 @@ public class Niveau extends JPanel{
 	*/
 	public int getFinalScore() {
 		return score.getNbPieces();
+	}
+	
+	public static void grandirImage() {
+		System.out.println("MarioGrandi");
+	}
+	
+	public void libérationChampignon(CubeMystere cube) {
+		tabChampignon.add(new Champignon(cube.getX() , cube.getY() + -32,false));
+		cube.setParticularité(Cubes.vide);
+		cube.changementImage();
 	}
 	
 	/** Redémare un niveau en remplacent le joueur au niveau de départ
