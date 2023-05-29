@@ -9,7 +9,7 @@ public class Deplacement implements KeyListener {
 	public static boolean paused;
 	public boolean descendre,sauter,right,left;  // comme mario ne peut pas se baisser, on ajoute un boolean pour savoir si l'on doit descendre dans un tuyau
 	
-	public final static int vitesseDeplacement = 4;   //Attention ce nombre doit diviser 1644.
+	public final static int vitesseDeplacement = 8;   //Attention ce nombre doit diviser 1644.
 	
 
 	@Override

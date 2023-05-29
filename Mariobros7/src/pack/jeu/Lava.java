@@ -9,7 +9,7 @@ private static final Collision Bas = null;
 	private static boolean afficher;
 
 	public Lava(int x, int y) {
-		super(200, 500, x, y);
+		super(84, 72, x, y);
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/Lava-Transparent4.png"));
 		super.imageObjet = this.icoObjet.getImage();
 		afficher = true;

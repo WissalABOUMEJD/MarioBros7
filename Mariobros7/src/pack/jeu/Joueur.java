@@ -21,8 +21,8 @@ public class Joueur {
 	
 	
 	
-	public final int hauteurMario = 48;
-	public final int largeurMario = 32;
+	public int hauteurMario = 48;
+	public int largeurMario = 32;
 	
 	//pour les fonctions courir 
 	public int compteurMarche;
@@ -183,6 +183,8 @@ public class Joueur {
                 Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
 	} else {
 		marioPetit = true;
+		hauteurMario = 48;
+		largeurMario = 40;
 	}
 		
 	}
@@ -190,7 +192,8 @@ public class Joueur {
 	public void grandir() {
 		if (marioPetit) {
 			marioPetit = false;
-			Niveau.grandirImage();
+			hauteurMario = 80;
+			largeurMario = 44;
 		}
 	}
 }

@@ -114,6 +114,9 @@ public class Niveau extends JPanel{
 	private ImageIcon static_droite;
 	private ImageIcon static_gauche;
 	private int compteurmarche;
+	
+	private Avatar typeMario;
+	
 	/**Constructeur de la classe niveau
 	*/
 	public Niveau() {
@@ -291,7 +294,6 @@ public class Niveau extends JPanel{
 			Menu.showPanels(Menu.gagnerPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
 	                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gameOverPanel);
 		}
-		
 		// Changement de position des personnages
 		if (player.sautEnCours == true && !player.chuteEnCours) {
 			player.sauter();
@@ -417,18 +419,9 @@ public class Niveau extends JPanel{
 		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 		for (Objet o : tabObjets) {
 			Rectangle rectangleObjet;
-			if (o instanceof Lava) {
-				rectangleObjet = new Rectangle(o.getX(),540,o.largeurObjet+2,o.hauteurObjet);
-			} else {
-				rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
-			}
+			rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
 			boolean touché = rectangleMario.intersects(rectangleObjet);
-
-			
-			
 			if (touché) {
-
-
 				if (o instanceof Lava) {
 					Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
 			                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
@@ -514,6 +507,7 @@ public class Niveau extends JPanel{
 					tabEnnemi.remove(o);  //Ajouter le bruit pour tuer l'ennemi
 				} else {
 					player.toucher();
+					retrecirImage();
 				} 
 			}
 		}	
@@ -528,6 +522,7 @@ public class Niveau extends JPanel{
 			if (touché) {
 				player.grandir();
 				tabChampignon.remove(o);
+				grandirImage();
 			}
 		}	
 	}
@@ -552,11 +547,7 @@ public class Niveau extends JPanel{
 	* @param NewImg image que l'utilisateur à choisit pour le niveau
 	* @param url localisation de l'image dans les fichiers pourvoir selectionner toutes les autres images de mouvements correspondant à ce personnage
 	*/
-	public void setMario(ImageIcon NewImg,String url) {
-		//on créer 2 images icon pour pouvoir choisir les images qu'on donne aux déplacments voir if et else juste après
-		ImageIcon avatar1=new ImageIcon(Menu.niveauPanel.getClass().getResource("/images/moustache_profil_static.png"));
-		ImageIcon avatar2=new ImageIcon(Menu.niveauPanel.getClass().getResource("/images/cregut_static_droit.png"));
-		
+	public void setMario(ImageIcon NewImg,String url) {		
 		this.MarioImg = NewImg;
 		this.Mario = NewImg.getImage();
 		if (url =="/images/moustache_profil_static.png") {
@@ -565,8 +556,9 @@ public class Niveau extends JPanel{
 			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
 			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
 			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
-			this.static_droite =avatar1;
+			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));;
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
+			typeMario = Avatar.Moustache;
 		}
 		else if(url =="/images/moustache_profil_static.png") {
 			//on charge les images pour le perso vert
@@ -574,8 +566,10 @@ public class Niveau extends JPanel{
 			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche.png"));
 			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut.png"));
 			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche.png"));
-			this.static_droite =avatar2;
+			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit.png"));
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche.png"));
+			typeMario = Avatar.Vert;
+
 		}else {
 			
 			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite.png"));
@@ -584,6 +578,8 @@ public class Niveau extends JPanel{
 			this.saut_gauche=new ImageIcon(getClass().getResource("/images/saut_gauche.png"));
 			this.static_droite =new ImageIcon(getClass().getResource("/images/static_droit.png"));
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/static_gauche.png"));
+			typeMario = Avatar.Mario;
+
 		}
 		
 	}
@@ -600,8 +596,62 @@ public class Niveau extends JPanel{
 		return score.getNbPieces();
 	}
 	
-	public static void grandirImage() {
-		System.out.println("MarioGrandi");
+	public void grandirImage() {
+		if (typeMario == Avatar.Moustache) {
+			// on charge les images pour le gars à la moustache
+			// on charge les images pour le gars à la moustache
+			this.marche_droite = new ImageIcon(getClass().getResource("/images/moustache_profil_marche.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));;
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
+		}
+		else if(typeMario == Avatar.Vert) {
+			//on charge les images pour le perso vert
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite_grand.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche_grand.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut_grand.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche_grand.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit_grand.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche_grand.png"));
+		}else {
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/saut_droite.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/static_droit.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/static_gauche.png"));
+		}	
+	}
+	
+	public void retrecirImage() {
+		if (typeMario == Avatar.Moustache) {
+			// on charge les images pour le gars à la moustache
+			// on charge les images pour le gars à la moustache
+			this.marche_droite = new ImageIcon(getClass().getResource("/images/moustache_profil_marche.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));;
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
+		}
+		else if(typeMario == Avatar.Vert) {
+			//on charge les images pour le perso vert
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche.png"));
+		}else {
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/saut_droite.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/static_droit.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/static_gauche.png"));
+		}	
 	}
 	
 	public void libérationChampignon(CubeMystere cube) {
