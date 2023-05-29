@@ -31,7 +31,7 @@ public class Joueur {
 	public boolean sautEnCours; 
 	public boolean chuteEnCours; 
 
-	public boolean marioPetit = true;
+	public  boolean marioPetit = true;
 
 
 	
@@ -185,5 +185,12 @@ public class Joueur {
 		marioPetit = true;
 	}
 		
+	}
+
+	public void grandir() {
+		if (marioPetit) {
+			marioPetit = false;
+			Niveau.grandirImage();
+		}
 	}
 }
