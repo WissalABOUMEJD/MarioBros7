@@ -6,7 +6,9 @@ public class Ennemi extends Objet{
 
 	
 	private static boolean afficher;
-	static boolean directionGauche;
+	public boolean directionGauche;
+	private static int vitesseEnnemi = 4;
+	
 
 	public Ennemi(int x, int y, boolean gauche) {
 		super(32, 32, x, y);
@@ -15,27 +17,20 @@ public class Ennemi extends Objet{
 		directionGauche = gauche;
 		afficher = true;
 	}
-	
-	@Override
-	public void actionObjet(Collision collision) {
 
-	}
 
 	public void deplacementEnnemi () {
 		if (directionGauche) {
-			super.setX(-6);
+			super.setX(-4);
 		} else {
-			super.setX(6);
+			super.setX(4);
 		}
 	}
 	
-	public void tuerEnnemi () {
-		
-	}
-
 	public void changerDirection () {
 		directionGauche = !directionGauche;
 	}
+	
 	public static boolean isAfficher() {
 		return afficher;
 	}
