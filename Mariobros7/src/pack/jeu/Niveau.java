@@ -275,14 +275,17 @@ public class Niveau extends JPanel{
 		Graphics g2 = (Graphics2D)g;
 		
 		//on détecte les collisions à l'instant t
-		detectionCollision(tabObjets);
-		detectionCollisionEnnemiMario(tabEnnemi);
 		detectionCollisionBonusMario(tabChampignon);
-		
+		detectionCollisionEnnemiMario(tabEnnemi);		
+		detectionCollision(tabObjets);
 		player.tomber();
+
+
 		
 		majFond();
 		
+		
+
 		//SI mario sur une piece on enleve la piece
 		for(int i=0;i< this.tabPieces.size();i++) {
 			if(player.contactPiece(tabPieces.get(i))==true) {
@@ -299,7 +302,6 @@ public class Niveau extends JPanel{
 
 
 		if (player.sautEnCours == true && !player.chuteEnCours) {
-
 			player.sauter();
 			Audio.playSound("/audio/saut.wav");
 			if(MarioImg==static_gauche) {
@@ -420,12 +422,15 @@ public class Niveau extends JPanel{
 
 	public void detectionCollision (ArrayList<Objet> tabObjets) {
 		Collision collision = null;
-		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 		for (Objet o : tabObjets) {
+			Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 			Rectangle rectangleObjet;
 			rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
 			boolean touché = rectangleMario.intersects(rectangleObjet);
 			if (touché) {
+				System.out.println(o);
+				System.out.println(player.getY() + player.hauteurMario);
+				System.out.println(o.getY());
 				if (o instanceof Lava) {
 					Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
 			                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
@@ -533,6 +538,7 @@ public class Niveau extends JPanel{
 				player.grandir();
 				tabChampignon.remove(o);
 				grandirImage();
+				player.setY(-32);
 			}
 			}
 		} catch (ConcurrentModificationException e) {
@@ -613,12 +619,13 @@ public class Niveau extends JPanel{
 		if (typeMario == Avatar.Moustache) {
 			// on charge les images pour le gars à la moustache
 			// on charge les images pour le gars à la moustache
-			this.marche_droite = new ImageIcon(getClass().getResource("/images/moustache_profil_marche.png"));
-			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
-			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
-			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
-			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));;
-			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite_grand.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche_grand.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut_grand.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche_grand.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit_grand.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche_grand.png"));
+			this.Mario = marche_droite.getImage();
 		}
 		else if(typeMario == Avatar.Vert) {
 			//on charge les images pour le perso vert
@@ -628,13 +635,15 @@ public class Niveau extends JPanel{
 			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche_grand.png"));
 			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit_grand.png"));
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche_grand.png"));
+			this.Mario = marche_droite.getImage();
 		}else {
-			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite.png"));
-			this.marche_gauche =new ImageIcon(getClass().getResource("/images/marche_gauche.png"));
-			this.saut_droite =new ImageIcon(getClass().getResource("/images/saut_droite.png"));
-			this.saut_gauche=new ImageIcon(getClass().getResource("/images/saut_gauche.png"));
-			this.static_droite =new ImageIcon(getClass().getResource("/images/static_droit.png"));
-			this.static_gauche=new ImageIcon(getClass().getResource("/images/static_gauche.png"));
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite_grand.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche_grand.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut_grand.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche_grand.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit_grand.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche_grand.png"));
+			this.Mario = marche_droite.getImage();
 		}	
 	}
 	
