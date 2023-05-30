@@ -62,7 +62,14 @@ public class Temps implements Runnable {
         		this.tempsRestant = "Temps restant : " + this.compteurTemps;
         	}
         }
-        //Audio.playSound("/audio/partiePerdue.wav");
+        Menu.niveauPanel.clip.stop();
+        if (compteurTemps == 1) {
+        	Audio.playSound("/audio/death.wav");
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {}
+			Audio.playSound("/audio/partiePerdue.wav");
+        }
         Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
                 Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
     }
