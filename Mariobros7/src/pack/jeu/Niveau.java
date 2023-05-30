@@ -191,7 +191,7 @@ public class Niveau extends JPanel{
 		brique3 = new Brique(1290, 404,Briques.cassable);
 		brique4 = new Brique(1352, 404,Briques.pièce);
 		cube2 = new CubeMystere(1320, 404,Cubes.vide);
-		tuyau1 = new Tuyau(1500, 484);
+		tuyau1 = new Tuyau(1528, 484);
 		tuyau2 = new Tuyau(1800, 484);
 		tuyau3 = new Tuyau(2100, 484);
 		brique5 = new Brique(1952, 404,Briques.pièces);
@@ -200,11 +200,11 @@ public class Niveau extends JPanel{
 		brique7 = new Brique(2660, 404,Briques.pièce);
 		brique8 = new Brique(3300, 404,Briques.cassable);
 		brique9 = new Brique(2692, 404,Briques.cassable);
-		brique10 = new Brique(3404, 304,Briques.cassable);
-		brique11 = new Brique(3432, 304,Briques.cassable);
-		brique12 = new Brique(3464, 304,Briques.cassable);
-		brique13 = new Brique(3492, 304,Briques.cassable);
-		brique14 = new Brique(3524, 304,Briques.cassable);
+		brique10 = new Brique(3408, 308,Briques.cassable);
+		brique11 = new Brique(3436, 308,Briques.cassable);
+		brique12 = new Brique(3468, 308,Briques.cassable);
+		brique13 = new Brique(3496, 308,Briques.cassable);
+		brique14 = new Brique(3528, 308,Briques.cassable);
 		
 		cube1 = new CubeMystere(1260, 404,Cubes.pièces);
 		//Instancier objet piece
@@ -660,13 +660,12 @@ public class Niveau extends JPanel{
 			this.Mario = marche_droite.getImage();
 		}
 		else if(typeMario == Avatar.Moustache) {
-			//on charge les images pour le perso vert
-			this.marche_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_marche.png"));
-			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
-			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
-			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
-			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));
-			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_grand.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche_grand.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut_grand.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche_grand.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static_grand.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche_grand.png"));
 			this.Mario = marche_droite.getImage();
 		}else {
 			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite_grand.png"));
