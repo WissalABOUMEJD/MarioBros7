@@ -516,6 +516,7 @@ public class Niveau extends JPanel{
 			boolean touché = rectangleMario.intersects(rectangleEnnemi);	
 			if (touché) {
 				if (player.getY() + player.hauteurMario == o.getY() ) {   //Contact de mario sur le haut de l'ennemi
+					Audio.playSound("/audio/ecrasePersonnage.wav");
 					tabEnnemi.remove(o);  //Ajouter le bruit pour tuer l'ennemi
 				} else {
 					player.toucher();
