@@ -781,11 +781,15 @@ public class Niveau extends JPanel{
 		brique7 = new Brique(2660, 404,Briques.pièce);
 		brique8 = new Brique(3300, 404,Briques.cassable);
 		brique9 = new Brique(2692, 404,Briques.cassable);
-		brique10 = new Brique(3404, 304,Briques.cassable);
-		brique11 = new Brique(3432, 304,Briques.cassable);
-		brique12 = new Brique(3464, 304,Briques.cassable);
-		brique13 = new Brique(3492, 304,Briques.cassable);
-		brique14 = new Brique(3524, 304,Briques.cassable);
+		brique10 = new Brique(3404, 404,Briques.cassable);
+		brique11 = new Brique(3432, 404,Briques.cassable);
+		brique12 = new Brique(3464, 404,Briques.cassable);
+		brique13 = new Brique(3492, 404,Briques.cassable);
+		brique14 = new Brique(3524, 404,Briques.cassable);
+		cube1 = new CubeMystere(1256, 404,Cubes.vide);
+		cube3 = new CubeMystere(1280, 260,Cubes.champignon);
+		cube2 = new CubeMystere(1320, 404,Cubes.vide);
+		cube4 = new CubeMystere(2632, 404,Cubes.champignon);
 		
 		this.tabObjets.add(this.brique1);
 		this.tabObjets.add(this.brique2);
@@ -801,8 +805,11 @@ public class Niveau extends JPanel{
 		this.tabObjets.add(this.brique12);
 		this.tabObjets.add(this.brique13);
 		this.tabObjets.add(this.brique14);
-		ennemi1 = new Ennemi(500,452,false);
-		
+		this.tabObjets.add(this.cube1);
+		this.tabObjets.add(this.cube2);
+		this.tabObjets.add(this.cube3);
+		this.tabObjets.add(this.cube4);
+
 		ennemi1 = new Ennemi(500,452,false);
 		ennemi2 = new Ennemi(1900,452,false);
 		ennemi3 = new Ennemi(2200,452,false);
