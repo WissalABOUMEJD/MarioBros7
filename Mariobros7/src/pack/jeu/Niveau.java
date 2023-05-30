@@ -137,7 +137,8 @@ public class Niveau extends JPanel{
 	private int compteurmarche;
 	public Clip clip ;
 	private Avatar typeMario;
-	
+	private int compteurToucherEnnemi = 0;
+
 	/**Constructeur de la classe niveau
 	*/
 	public Niveau() {
@@ -512,6 +513,7 @@ public class Niveau extends JPanel{
 	}
 
 	public void detectionCollisionEnnemiMario (ArrayList<Ennemi> tabEnnemi) {
+		boolean touchéUnEnnemi = false;
 		try {
 		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 		for (Ennemi o : tabEnnemi) {
@@ -519,6 +521,7 @@ public class Niveau extends JPanel{
 			rectangleEnnemi = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);	
 			boolean touché = rectangleMario.intersects(rectangleEnnemi);	
 			if (touché) {
+				touchéUnEnnemi = true;
 				if (player.getY() + player.hauteurMario == o.getY() ) {   //Contact de mario sur le haut de l'ennemi
 					Audio.playSound("/audio/ecrasePersonnage.wav");
 					tabEnnemi.remove(o);  //Ajouter le bruit pour tuer l'ennemi
@@ -535,12 +538,17 @@ public class Niveau extends JPanel{
 							Thread.sleep(2000);
 						} catch (InterruptedException e) {}
 				     }
+					if (compteurToucherEnnemi == 0) {
 					player.toucher();
 					retrecirImage();
-					
+					compteurToucherEnnemi++;
+					}	
 				} 
 			}
 		} 
+		if (!touchéUnEnnemi) {
+			compteurToucherEnnemi =0;
+		}
 		}catch (ConcurrentModificationException e)	{
 			
 		}
