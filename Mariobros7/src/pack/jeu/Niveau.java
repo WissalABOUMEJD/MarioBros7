@@ -324,11 +324,13 @@ public class Niveau extends JPanel{
 		for(int i=0;i< this.tabPieces.size();i++) {
 			if(player.contactPiece(tabPieces.get(i))==true) {
 				Audio.playSound("/audio/eatmoney.wav");
-				this.tabPieces.remove(i);
 				this.tabPiecesRemoved.add(tabPieces.get(i));
+				this.tabPieces.remove(i);
 				this.score.setNbrePieces(this.score.getNbPieces() + 1);
+				this.score.setScoreEnCours(this.score.getScoreEnCours()+100);
+			}
 		}
-		}
+		
 		
 		if(player.contactChateau(chateau)) {
 			Menu.showPanels(Menu.gagnerPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
@@ -399,6 +401,7 @@ public class Niveau extends JPanel{
 		Font font = new Font("Press Start 2P", Font.PLAIN, 20);
 		g2.setFont(font);
 		g2.drawString(this.temps.getTempsRestant(), 5, 25);
+		g2.drawString(" score : " + this.score.getScoreEnCours(), 700, 25);
 		g2.drawString(this.score.getNbPieces() + " pièces trouvées ", 1150, 25);
 
 	}
@@ -511,6 +514,7 @@ public class Niveau extends JPanel{
 				if (player.getY() + player.hauteurMario == o.getY() ) {   //Contact de mario sur le haut de l'ennemi
 					Audio.playSound("/audio/ecrasePersonnage.wav");
 					tabEnnemi.remove(o);  //Ajouter le bruit pour tuer l'ennemi
+					this.score.setScoreEnCours(this.score.getScoreEnCours()+ 200);
 				} else {
 					
 					player.toucher();
@@ -546,6 +550,7 @@ public class Niveau extends JPanel{
 				tabChampignon.remove(o);
 				grandirImage();
 				player.setY(-32);
+				this.score.setScoreEnCours(this.score.getScoreEnCours()+ 3000);
 			}
 			}
 		} catch (ConcurrentModificationException e) {
@@ -621,7 +626,7 @@ public class Niveau extends JPanel{
 	* @return entier correspond au nombre de coin gagner
 	*/
 	public int getFinalScore() {
-		return score.getNbPieces();
+		return score.getScoreEnCours();
 	}
 	
 	public void grandirImage() {
@@ -757,14 +762,49 @@ public class Niveau extends JPanel{
 			this.tabEnnemi.remove(this.tabEnnemi.get(i));
  	 	}
 		for(int i = 0; i < this.tabPiecesRemoved.size(); i++){
-			this.tabPieces.remove(this.tabPiecesRemoved.get(i));
+			this.tabPieces.add(this.tabPiecesRemoved.get(i));
  	 	}
+		for(int i = 0; i <this.tabObjets.size() ; i++){
+			if (tabObjets.get(i) instanceof Brique) {
+				this.tabObjets.remove(this.tabObjets.get(i));
+			}
+ 	 	}
+		brique1 = new Brique(1200, 404,Briques.cassable);
+		brique2 = new Brique(1228, 404,Briques.pièce);
+		brique3 = new Brique(1290, 404,Briques.cassable);
+		brique4 = new Brique(1352, 404,Briques.pièce);
+		brique5 = new Brique(1952, 404,Briques.pièces);
+		brique6 = new Brique(2600, 404,Briques.pièces);
+		brique7 = new Brique(2660, 404,Briques.pièce);
+		brique8 = new Brique(3300, 404,Briques.cassable);
+		brique9 = new Brique(2692, 404,Briques.cassable);
+		brique10 = new Brique(3404, 304,Briques.cassable);
+		brique11 = new Brique(3432, 304,Briques.cassable);
+		brique12 = new Brique(3464, 304,Briques.cassable);
+		brique13 = new Brique(3492, 304,Briques.cassable);
+		brique14 = new Brique(3524, 304,Briques.cassable);
+		
+		this.tabObjets.add(this.brique1);
+		this.tabObjets.add(this.brique2);
+		this.tabObjets.add(this.brique3);
+		this.tabObjets.add(this.brique4);
+		this.tabObjets.add(this.brique5);
+		this.tabObjets.add(this.brique6);
+		this.tabObjets.add(this.brique7);
+		this.tabObjets.add(this.brique8);
+		this.tabObjets.add(this.brique9);
+		this.tabObjets.add(this.brique10);
+		this.tabObjets.add(this.brique11);
+		this.tabObjets.add(this.brique12);
+		this.tabObjets.add(this.brique13);
+		this.tabObjets.add(this.brique14);
 		ennemi1 = new Ennemi(500,452,false);
 		this.tabEnnemi.add(ennemi1);
 	
 		xFondCumule = 0;
 	    temps.setCompteurTemps(temps.getCompteurTemps());
 	    player.setX(0);
+	    score.setScoreEnCours(0);;
 
 	}
 	
