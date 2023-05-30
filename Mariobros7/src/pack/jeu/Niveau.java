@@ -637,12 +637,12 @@ public class Niveau extends JPanel{
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche_grand.png"));
 			this.Mario = marche_droite.getImage();
 		}else {
-			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite_grand.png"));
-			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche_grand.png"));
-			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut_grand.png"));
-			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche_grand.png"));
-			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit_grand.png"));
-			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche_grand.png"));
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/saut_droite.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/static_droit.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/static_gauche.png"));
 			this.Mario = marche_droite.getImage();
 		}	
 	}
