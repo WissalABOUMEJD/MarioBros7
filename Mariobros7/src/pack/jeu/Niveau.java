@@ -571,12 +571,12 @@ public class Niveau extends JPanel{
 		this.Mario = NewImg.getImage();
 		if (url =="/images/moustache_profil_static.png") {
 			// on charge les images pour le gars à la moustache
-			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite.png"));
-			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche.png"));
-			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut.png"));
-			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche.png"));
-			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit.png"));
-			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche.png"));
+			this.marche_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_marche.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_static_gauche.png"));
 			typeMario = Avatar.Moustache;
 		}
 		else if(url =="/images/moustache_profil_static.png") {
