@@ -63,6 +63,18 @@ public class Niveau extends JPanel{
 	public Brique brique10;
 	public Brique brique11;
 	public Brique brique12;
+	public Brique brique13;
+	public Brique brique14;
+	public Brique brique15;
+	public Brique brique16;
+	public Brique brique17;
+	public Brique brique18;
+	public Brique brique19;
+	public Brique brique20;
+	public Brique brique21;
+	public Brique brique22;
+	public Brique brique23;
+	public Brique brique24;
 	//ajout des cube mystere
 	public CubeMystere cube1;
 	public CubeMystere cube2;
@@ -80,6 +92,7 @@ public class Niveau extends JPanel{
 	//ajout du sol et de la lave
 	public Ground ground;
 	public Ground ground2;
+	public Ground ground3;
 	public Lava lava;
 	//ajout des pièces
 	public Piece piece1;
@@ -94,10 +107,10 @@ public class Niveau extends JPanel{
 	public Champignon champignon;
 	
 	private ArrayList<Objet> tabObjets; // tableau qui enregistre tous les objets du jeu
-	private ArrayList<Piece> tabPieces; // tableau qui enregistre tous les pices du niveau
-	private ArrayList<Ennemi> tabEnnemi; // tableau qui enregistre tous les pices du niveau
-	private ArrayList<Champignon> tabChampignon; // tableau qui enregistre tous les pices du niveau
-
+	private ArrayList<Piece> tabPieces; // tableau qui enregistre tous les pieces du niveau
+	private ArrayList<Ennemi> tabEnnemi; // tableau qui enregistre tous les pieces du niveau
+	private ArrayList<Champignon> tabChampignon; // tableau qui enregistre tous les pieces du niveau
+	private ArrayList<Piece> tabPiecesRemoved;
 
 	public Chateau chateau;
 	public Temps temps;
@@ -147,7 +160,8 @@ public class Niveau extends JPanel{
 		
 		lava = new Lava(1568, 548);
 		ground = new Ground(0, 548);
-		ground2 = new Ground(1796, 548);
+		ground2 = new Ground(1650, 548);
+		ground3 = new Ground(3200, 548);
 		GroundImg = new ImageIcon(getClass().getResource("/images/ground.png"));
 		Ground = GroundImg.getImage();
 		
@@ -162,22 +176,27 @@ public class Niveau extends JPanel{
 		
 		//instanciantion des objets
 		brique1 = new Brique(1200, 404,Briques.cassable);
-		brique2 = new Brique(1230, 404,Briques.pièce);
+		brique2 = new Brique(1228, 404,Briques.pièce);
 
-		cube1 = new CubeMystere(1260, 404,Cubes.vide);
+		cube1 = new CubeMystere(1256, 404,Cubes.vide);
 		cube3 = new CubeMystere(1280, 260,Cubes.champignon);
 		brique3 = new Brique(1290, 404,Briques.cassable);
-		brique4 = new Brique(1350, 404,Briques.pièce);
+		brique4 = new Brique(1352, 404,Briques.pièce);
 		cube2 = new CubeMystere(1320, 404,Cubes.vide);
 		tuyau1 = new Tuyau(1500, 484);
 		tuyau2 = new Tuyau(1800, 484);
 		tuyau3 = new Tuyau(2100, 484);
-		brique5 = new Brique(1950, 404,Briques.pièces);
+		brique5 = new Brique(1952, 404,Briques.pièces);
 		brique6 = new Brique(2600, 404,Briques.pièces);
-		cube4 = new CubeMystere(2630, 404,Cubes.champignon);
+		cube4 = new CubeMystere(2632, 404,Cubes.champignon);
 		brique7 = new Brique(2660, 404,Briques.pièce);
 		brique8 = new Brique(3300, 404,Briques.cassable);
-		brique9 = new Brique(3404, 404,Briques.cassable);
+		brique9 = new Brique(2692, 404,Briques.cassable);
+		brique10 = new Brique(3404, 304,Briques.cassable);
+		brique11 = new Brique(3432, 304,Briques.cassable);
+		brique12 = new Brique(3464, 304,Briques.cassable);
+		brique13 = new Brique(3492, 304,Briques.cassable);
+		brique14 = new Brique(3524, 304,Briques.cassable);
 		
 		cube1 = new CubeMystere(1260, 404,Cubes.pièces);
 		//Instancier objet piece
@@ -212,6 +231,12 @@ public class Niveau extends JPanel{
 		this.tabObjets.add(this.brique6);
 		this.tabObjets.add(this.brique7);
 		this.tabObjets.add(this.brique8);
+		this.tabObjets.add(this.brique9);
+		this.tabObjets.add(this.brique10);
+		this.tabObjets.add(this.brique11);
+		this.tabObjets.add(this.brique12);
+		this.tabObjets.add(this.brique13);
+		this.tabObjets.add(this.brique14);
 		
 		this.tabObjets.add(this.cube1);
 		this.tabObjets.add(this.cube2);
@@ -230,8 +255,11 @@ public class Niveau extends JPanel{
 		
 		this.tabObjets.add(this.ground);
 		this.tabObjets.add(this.ground2);
+		this.tabObjets.add(this.ground3);
+		
 		
 		tabEnnemi = new ArrayList<Ennemi>();
+		tabPiecesRemoved = new ArrayList<Piece>();
 		this.tabEnnemi.add(this.ennemi1);		
 		
 		tabChampignon = new ArrayList<Champignon>();
@@ -275,22 +303,20 @@ public class Niveau extends JPanel{
 		Graphics g2 = (Graphics2D)g;
 		
 		//on détecte les collisions à l'instant t
-		detectionCollisionBonusMario(tabChampignon);
-		detectionCollisionEnnemiMario(tabEnnemi);		
 		detectionCollision(tabObjets);
+		detectionCollisionEnnemiMario(tabEnnemi);
+		detectionCollisionBonusMario(tabChampignon);
+		
 		player.tomber();
-
-
 		
 		majFond();
 		
-		
-
 		//SI mario sur une piece on enleve la piece
 		for(int i=0;i< this.tabPieces.size();i++) {
 			if(player.contactPiece(tabPieces.get(i))==true) {
 				Audio.playSound("/audio/eatmoney.wav");
 				this.tabPieces.remove(i);
+				this.tabPiecesRemoved.add(tabPieces.get(i));
 				this.score.setNbrePieces(this.score.getNbPieces() + 1);
 		}
 		}
@@ -303,6 +329,7 @@ public class Niveau extends JPanel{
 
 
 		if (player.sautEnCours == true && !player.chuteEnCours) {
+
 			player.sauter();
 			Audio.playSound("/audio/saut.wav");
 			if(MarioImg==static_gauche) {
@@ -352,19 +379,13 @@ public class Niveau extends JPanel{
 		if (rejouer == true) {
 			Audio.playSound("/audio/partiePerdue.wav");
 		}
-		
 
-		
-		
 		
 		player.setCollisionBas(false);
 		player.setCollisionDroite(false);
 		player.setCollisionGauche(false);
 		player.setCollisionHaut(false);
-		
 
-
-		
 
 		g2.drawImage(this.fondDuJeu1, xFond1, 0, null); 		 	    
 		g2.drawImage(this.fondDuJeu2, xFond2, 0, null); 	
@@ -372,6 +393,7 @@ public class Niveau extends JPanel{
 		g2.drawImage(chateau.getImageObjet(), deplacement(chateau), chateau.getY(), null);
 		g2.drawImage(Ground, deplacement(ground), ground.getY(), null);
 		g2.drawImage(Ground, deplacement(ground2), ground2.getY(), null);
+		g2.drawImage(Ground, deplacement(ground3), ground3.getY(), null);
 		
 		//Image des objets
 		for(int i = 0; i < this.tabObjets.size(); i++){
@@ -424,15 +446,12 @@ public class Niveau extends JPanel{
 
 	public void detectionCollision (ArrayList<Objet> tabObjets) {
 		Collision collision = null;
+		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 		for (Objet o : tabObjets) {
-			Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 			Rectangle rectangleObjet;
 			rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
 			boolean touché = rectangleMario.intersects(rectangleObjet);
 			if (touché) {
-				System.out.println(o);
-				System.out.println(player.getY() + player.hauteurMario);
-				System.out.println(o.getY());
 				if (o instanceof Lava) {
 					Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
 			                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
@@ -518,6 +537,7 @@ public class Niveau extends JPanel{
 				if (player.getY() + player.hauteurMario == o.getY() ) {   //Contact de mario sur le haut de l'ennemi
 					Audio.playSound("/audio/ecrasePersonnage.wav");
 					tabEnnemi.remove(o);  //Ajouter le bruit pour tuer l'ennemi
+					
 				} else {
 					player.toucher();
 					retrecirImage();
@@ -541,7 +561,6 @@ public class Niveau extends JPanel{
 				player.grandir();
 				tabChampignon.remove(o);
 				grandirImage();
-				player.setY(-32);
 			}
 			}
 		} catch (ConcurrentModificationException e) {
@@ -593,7 +612,6 @@ public class Niveau extends JPanel{
 			typeMario = Avatar.Vert;
 
 		}else {
-			
 			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite.png"));
 			this.marche_gauche =new ImageIcon(getClass().getResource("/images/marche_gauche.png"));
 			this.saut_droite =new ImageIcon(getClass().getResource("/images/saut_droite.png"));
@@ -622,13 +640,12 @@ public class Niveau extends JPanel{
 		if (typeMario == Avatar.Moustache) {
 			// on charge les images pour le gars à la moustache
 			// on charge les images pour le gars à la moustache
-			this.marche_droite =new ImageIcon(getClass().getResource("/images/cregut_marche_droite_grand.png"));
-			this.marche_gauche =new ImageIcon(getClass().getResource("/images/cregut_marche_gauche_grand.png"));
-			this.saut_droite =new ImageIcon(getClass().getResource("/images/cregut_saut_grand.png"));
-			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche_grand.png"));
-			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit_grand.png"));
-			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche_grand.png"));
-			this.Mario = marche_droite.getImage();
+			this.marche_droite = new ImageIcon(getClass().getResource("/images/moustache_profil_marche.png"));
+			this.marche_gauche =new ImageIcon(getClass().getResource("/images/moustache_profil_marche_gauche.png"));
+			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
+			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
+			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));;
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
 		}
 		else if(typeMario == Avatar.Vert) {
 			//on charge les images pour le perso vert
@@ -638,7 +655,6 @@ public class Niveau extends JPanel{
 			this.saut_gauche=new ImageIcon(getClass().getResource("/images/cregut_saut_gauche_grand.png"));
 			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit_grand.png"));
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche_grand.png"));
-			this.Mario = marche_droite.getImage();
 		}else {
 			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite.png"));
 			this.marche_gauche =new ImageIcon(getClass().getResource("/images/marche_gauche.png"));
@@ -646,7 +662,6 @@ public class Niveau extends JPanel{
 			this.saut_gauche=new ImageIcon(getClass().getResource("/images/saut_gauche.png"));
 			this.static_droite =new ImageIcon(getClass().getResource("/images/static_droit.png"));
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/static_gauche.png"));
-			this.Mario = marche_droite.getImage();
 		}	
 	}
 	
@@ -701,16 +716,19 @@ public class Niveau extends JPanel{
 		xFond2 = longueurImage; // Les deux images sont en longueurImagex824 pixels.
 		
 		xPlayer = 0;
-		
+		for(int i = 0; i < this.tabEnnemi.size(); i++){
+			this.tabEnnemi.remove(this.tabEnnemi.get(i));
+ 	 	}
+		for(int i = 0; i < this.tabPiecesRemoved.size(); i++){
+			this.tabPieces.remove(this.tabPiecesRemoved.get(i));
+ 	 	}
+		ennemi1 = new Ennemi(500,452,false);
+		this.tabEnnemi.add(ennemi1);
+	
 		xFondCumule = 0;
 	    temps.setCompteurTemps(temps.getCompteurTemps());
 	    player.setX(0);
-	    this.tabPieces.add(this.piece1);
-		this.tabPieces.add(this.piece2);
-		this.tabPieces.add(this.piece3);
-		this.tabPieces.add(this.piece4);
-		this.tabPieces.add(this.piece5);
-		this.tabPieces.add(this.piece6);
+
 	}
 	
 }
