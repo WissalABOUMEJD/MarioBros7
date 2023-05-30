@@ -378,6 +378,7 @@ public class Niveau extends JPanel{
 			if (tabObjets.get(i) instanceof Brique) {
 				Brique brick = (Brique) tabObjets.get(i);
 				if (brick.isCasse()) {
+					Audio.playSound("/audio/boum.wav");
 					tabObjets.remove(i);
 				}
 			} if (tabObjets.get(i) instanceof CubeMystere) {
