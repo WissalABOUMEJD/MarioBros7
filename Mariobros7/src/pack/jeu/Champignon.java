@@ -3,7 +3,12 @@ package pack.jeu;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-
+/**
+ * Classe qui représente un champignon.
+ * Elle étend la classe objet
+ * @author alexd
+ *
+ */
 public class Champignon extends Objet{
 	
 	

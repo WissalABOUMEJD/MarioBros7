@@ -1,13 +1,21 @@
 package pack.jeu;
 
 import javax.swing.ImageIcon;
-
+/**
+ * Classe représentant le sol du niveau
+ * @author alexd
+ *
+ */
 public class Ground extends Objet{
 	
 private static final Collision Bas = null;
 	
 	private static boolean afficher;
-
+	/**
+	 * Constructeur de la classe Ground
+	 * @param x
+	 * @param y
+	 */
 	public Ground(int x, int y) {
 		super(1568, 64, x, y);
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/ground.png"));

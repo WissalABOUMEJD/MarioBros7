@@ -1,12 +1,16 @@
 package pack.jeu;
 
 import javax.swing.ImageIcon;
-
+/**
+ * Classe répsente le chateau à la fin du jeu
+ * elle étend la calsse objet
+ * @author alexd
+ *
+ */
 public class Chateau extends Objet {
-	/** Constructeur de la classe piece
+	/** Constructeur de la classe Chateau
 	 * 
-	 * @param largeur 
-	 * @param hauteur
+	 * 
 	 * @param x
 	 * @param y
 	 */

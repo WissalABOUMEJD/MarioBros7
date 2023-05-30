@@ -3,7 +3,11 @@ package pack.jeu;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-
+/**
+ * Cette classe représente une brique dans le jeu, elles sont placées puis peuvent être détruit ou non
+ * @author alexd
+ *
+ */
 public class Brique extends Objet{
 	
 
@@ -12,7 +16,12 @@ public class Brique extends Objet{
 	private int compteurPièces = 3;
 	private int compteurPièce = 1;
 
-	
+	/**
+	 * Constructeur de la classe brique
+	 * @param x
+	 * @param y
+	 * @param particularité
+	 */
 	public Brique(int x, int y, Briques particularité) {
 		super(32, 32, x, y);
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/bloc.png"));

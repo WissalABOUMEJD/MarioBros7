@@ -3,7 +3,12 @@ package pack.jeu;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-
+/**Classe représente un cube mystère 
+ * Elle étend la classe objet
+ * 
+ * @author alexd
+ *
+ */
 public class CubeMystere extends Objet{
 	
 	private ImageIcon iconCube;
@@ -13,7 +18,12 @@ public class CubeMystere extends Objet{
 	private Cubes particularité;
 	private boolean libereChampignon;
 	
-	
+	/**Constructeur de la classe CubeMystère
+	 * 
+	 * @param x
+	 * @param y
+	 * @param particularité
+	 */
 	public CubeMystere(int x, int y,Cubes particularité) {
 		super(32, 32, x, y);
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/CubeMystère.png"));
@@ -57,7 +67,9 @@ public class CubeMystere extends Objet{
 		CubeMystere.afficher = afficher;
 	}
 
-
+	/**Lorsqu'un cube mystère est touché il change de couleur
+	 * 
+	 */
 	public void changementImage() {
 		super.icoObjet = new ImageIcon(getClass().getResource("/images/CubeMystèreFoncé.png"));
 		super.imageObjet = icoObjet.getImage();

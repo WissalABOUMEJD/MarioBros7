@@ -2,7 +2,11 @@ package pack.jeu;
 
 import audioMario.Audio;
 import menu.Menu;
-
+/**
+ * Classe qui représente le compteur de temps de la partie, au bout d'un certain moment si le temps est fini c'est game over
+ * @author alexd
+ *
+ */
 public class Temps implements Runnable {
     private int compteurTemps;
     private final int pause = 1000;
