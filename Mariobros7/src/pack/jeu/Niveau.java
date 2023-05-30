@@ -598,7 +598,7 @@ public class Niveau extends JPanel{
 			this.saut_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_saut.png"));
 			this.saut_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_saut_gauche.png"));
 			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));
-			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_profil_static_gauche.png"));
+			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
 			typeMario = Avatar.Moustache;
 		}
 		else if(url =="/images/moustache_profil_static.png") {
