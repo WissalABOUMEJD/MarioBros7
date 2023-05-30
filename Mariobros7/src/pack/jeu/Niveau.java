@@ -129,7 +129,7 @@ public class Niveau extends JPanel{
 	private ImageIcon static_gauche;
 	private boolean grandir;
 	private int compteurmarche;
-	
+	public Clip clip ;
 	private Avatar typeMario;
 	
 	/**Constructeur de la classe niveau
@@ -210,7 +210,12 @@ public class Niveau extends JPanel{
 		chateau = new Chateau(3800,404);
 		
 		ennemi1 = new Ennemi(500,452,false);
-
+		try {
+			InputStream audioInputStream = getClass().getResourceAsStream("/audio/mario.wav");
+			AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioInputStream);
+			clip = AudioSystem.getClip();
+			clip.open(audioStream);
+		} catch (Exception e) {}
 
 		//Image brique = new ImageIcon(getClass().getResource("/images/Brique.png")).getImage();
 
@@ -417,6 +422,15 @@ public class Niveau extends JPanel{
 				if (o instanceof Lava) {
 					Menu.showPanels(Menu.gameOverPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
 			                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gagnerPanel);
+					clip.stop();
+					Audio.playSound("/audio/death.wav");
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {}
+					Audio.playSound("/audio/partiePerdue.wav");
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {}
 				}
 				if (o.getX() == player.getX() + xFondCumule + player.largeurMario && player.getY() + player.hauteurMario != o.getY()) {
 					collision = Collision.Gauche;
@@ -495,10 +509,21 @@ public class Niveau extends JPanel{
 			boolean touché = rectangleMario.intersects(rectangleEnnemi);	
 			if (touché) {
 				if (player.getY() + player.hauteurMario == o.getY() ) {   //Contact de mario sur le haut de l'ennemi
+					Audio.playSound("/audio/ecrasePersonnage.wav");
 					tabEnnemi.remove(o);  //Ajouter le bruit pour tuer l'ennemi
 				} else {
+					
 					player.toucher();
 					retrecirImage();
+					clip.stop();
+					Audio.playSound("/audio/death.wav");
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {}
+					Audio.playSound("/audio/partiePerdue.wav");
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {}
 				} 
 			}
 		} 
@@ -560,6 +585,7 @@ public class Niveau extends JPanel{
 			this.static_droite =new ImageIcon(getClass().getResource("/images/moustache_profil_static.png"));
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/moustache_static_gauche.png"));
 			typeMario = Avatar.Moustache;
+			clip.start();
 		}
 		else if(url =="/images/cregut_static_droit.png") {
 			//on charge les images pour le perso vert
@@ -570,6 +596,7 @@ public class Niveau extends JPanel{
 			this.static_droite =new ImageIcon(getClass().getResource("/images/cregut_static_droit.png"));
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/cregut_static_gauche.png"));
 			typeMario = Avatar.Vert;
+			clip.start();
 
 		}else {
 			this.marche_droite =new ImageIcon(getClass().getResource("/images/marche_droite.png"));
@@ -579,6 +606,7 @@ public class Niveau extends JPanel{
 			this.static_droite =new ImageIcon(getClass().getResource("/images/static_droit.png"));
 			this.static_gauche=new ImageIcon(getClass().getResource("/images/static_gauche.png"));
 			typeMario = Avatar.Mario;
+			clip.start();
 
 		}
 		
