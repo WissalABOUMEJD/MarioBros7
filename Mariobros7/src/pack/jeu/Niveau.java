@@ -289,6 +289,7 @@ public class Niveau extends JPanel{
 		//SI mario sur une piece on enleve la piece
 		for(int i=0;i< this.tabPieces.size();i++) {
 			if(player.contactPiece(tabPieces.get(i))==true) {
+				Audio.playSound("/audio/eatmoney.wav");
 				this.tabPieces.remove(i);
 				this.score.setNbrePieces(this.score.getNbPieces() + 1);
 		}
