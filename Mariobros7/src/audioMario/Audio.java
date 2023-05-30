@@ -13,9 +13,9 @@ public class Audio {
 	public Audio(String son){
 			
 		try {
-			//AudioInputStream audio = AudioSystem.getAudioInputStream(getClass().getResource(son));
+			AudioInputStream audio = AudioSystem.getAudioInputStream(getClass().getResource(son));
 			clip = AudioSystem.getClip();
-			//clip.open(audio);
+			clip.open(audio);
 		} catch (Exception e) {}		
 	}
 
