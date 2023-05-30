@@ -107,6 +107,8 @@ public class Niveau extends JPanel{
 	public Piece piece6;
 	
 	public Ennemi ennemi1;
+	public Ennemi ennemi2;
+	public Ennemi ennemi3;
 
 	public Champignon champignon;
 	
