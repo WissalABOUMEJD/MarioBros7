@@ -282,7 +282,7 @@ public class Menu extends JFrame {
      * @param evt l'événement de la souris
      */
     public static void avatar3MouseClicked(java.awt.event.MouseEvent evt) {
-    	niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/modifmario_arefaire.png")),"/images/modifmario_arefaire.png");
+    	niveauPanel.setMario(new ImageIcon(niveauPanel.getClass().getResource("/images/static_droit.png")),"/images/static_droit.png");
     	niveauPanel.temps.setCompteurTemps(niveauPanel.temps.getCompteurTempsInitial());
     	showPanels(niveauPanel, optionsPanel, MainMenuPanel, languePanel, scorePanel, jouerPanel, volumePanel, gameOverPanel, gagnerPanel);
     }
