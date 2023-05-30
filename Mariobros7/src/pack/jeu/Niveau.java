@@ -1,10 +1,14 @@
 package pack.jeu;
 
+import javax.sound.sampled.Clip;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import java.io.InputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -338,13 +342,6 @@ public class Niveau extends JPanel{
 		}
 		// Changement de position des personnages
 
-
-		
-		
-		
-		if (rejouer == true) {
-			Audio.playSound("/audio/partiePerdue.wav");
-		}
 		
 		if (grandir) {
 			this.Mario = marche_droite.getImage();
