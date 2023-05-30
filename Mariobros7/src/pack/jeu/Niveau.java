@@ -343,6 +343,11 @@ public class Niveau extends JPanel{
 		
 		
 		if(player.contactChateau(chateau)) {
+			clip.stop();
+			Audio.playSound("/audio/partieGagnee.wav");
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {}
 			Menu.showPanels(Menu.gagnerPanel, Menu.languePanel, Menu.MainMenuPanel, Menu.volumePanel, Menu.scorePanel,
 	                Menu.jouerPanel, Menu.niveauPanel, Menu.optionsPanel, Menu.gameOverPanel);
 		}
