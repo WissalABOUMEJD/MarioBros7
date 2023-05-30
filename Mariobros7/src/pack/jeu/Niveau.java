@@ -408,8 +408,8 @@ public class Niveau extends JPanel{
 
 	public void detectionCollision (ArrayList<Objet> tabObjets) {
 		Collision collision = null;
-		Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 		for (Objet o : tabObjets) {
+			Rectangle rectangleMario = new Rectangle(player.getX() + xFondCumule ,player.getY(),player.largeurMario + 1,player.hauteurMario+1);
 			Rectangle rectangleObjet;
 			rectangleObjet = new Rectangle(o.getX(),o.getY(),o.largeurObjet+1,o.hauteurObjet+1);
 			boolean touché = rectangleMario.intersects(rectangleObjet);
@@ -437,7 +437,7 @@ public class Niveau extends JPanel{
 				} if (player.getY() == o.getY() +o.hauteurObjet ){ 
 					collision = Collision.Haut;      
 					player.setCollisionHaut(true);
-					o.actionObjet(collision);
+					o.actionObjet(collision);	
 				}
 			}
 		}
@@ -457,9 +457,8 @@ public class Niveau extends JPanel{
 				tomber = false;
 			} else if (touché) {   //Collision avec un obstacle
 				ennemi.changerDirection();
-			}
-			
-			}
+			}	
+		}
 		if (tomber) {
 			ennemi.setY(16);
 		}
