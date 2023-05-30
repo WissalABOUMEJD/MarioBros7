@@ -52,7 +52,7 @@ public class Jouer extends JPanel {
             }
         });
 
-        avatar3.setIcon(new ImageIcon(getClass().getResource("/images/modifmario_arefaire.png")));
+        avatar3.setIcon(new ImageIcon(getClass().getResource("/images/static_mario.png")));
         add(avatar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 400, -1, -1));
         
         avatar3.addMouseListener(new java.awt.event.MouseAdapter() {
