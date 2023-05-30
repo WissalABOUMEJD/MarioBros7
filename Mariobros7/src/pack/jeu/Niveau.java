@@ -519,18 +519,20 @@ public class Niveau extends JPanel{
 					tabEnnemi.remove(o);  //Ajouter le bruit pour tuer l'ennemi
 					this.score.setScoreEnCours(this.score.getScoreEnCours()+ 200);
 				} else {
-					
+					if (player.marioPetit) {
+						clip.stop();
+						Audio.playSound("/audio/death.wav");
+						try {
+							Thread.sleep(200);
+						} catch (InterruptedException e) {}
+						Audio.playSound("/audio/partiePerdue.wav");
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {}
+				     }
 					player.toucher();
 					retrecirImage();
-					clip.stop();
-					Audio.playSound("/audio/death.wav");
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {}
-					Audio.playSound("/audio/partiePerdue.wav");
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {}
+					
 				} 
 			}
 		} 
