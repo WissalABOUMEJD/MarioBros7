@@ -214,6 +214,8 @@ public class Niveau extends JPanel{
 		chateau = new Chateau(3800,404);
 		
 		ennemi1 = new Ennemi(500,452,false);
+		ennemi2 = new Ennemi(1900,452,false);
+		ennemi3 = new Ennemi(2400,452,false);
 		try {
 			InputStream audioInputStream = getClass().getResourceAsStream("/audio/mario.wav");
 			AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioInputStream);
@@ -270,7 +272,9 @@ public class Niveau extends JPanel{
 		
 		tabEnnemi = new ArrayList<Ennemi>();
 		tabPiecesRemoved = new ArrayList<Piece>();
-		this.tabEnnemi.add(this.ennemi1);		
+		this.tabEnnemi.add(this.ennemi1);
+		this.tabEnnemi.add(this.ennemi2);
+		this.tabEnnemi.add(this.ennemi3);
 		
 		tabChampignon = new ArrayList<Champignon>();
 
@@ -796,8 +800,14 @@ public class Niveau extends JPanel{
 		this.tabObjets.add(this.brique13);
 		this.tabObjets.add(this.brique14);
 		ennemi1 = new Ennemi(500,452,false);
+		
+		ennemi1 = new Ennemi(500,452,false);
+		ennemi2 = new Ennemi(1900,452,false);
+		ennemi3 = new Ennemi(2200,452,false);
 		this.tabEnnemi.add(ennemi1);
-	
+		this.tabEnnemi.add(ennemi2);
+		this.tabEnnemi.add(ennemi3);
+		
 		xFondCumule = 0;
 	    temps.setCompteurTemps(temps.getCompteurTemps());
 	    player.setX(0);
